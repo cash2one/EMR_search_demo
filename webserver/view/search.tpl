@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="input-group">
-          <input id ="textbox" type="text" class="form-control" placeholder={{keywords}}>
+          <input id ="textbox" type="text" class="form-control" placeholder="{{keywords}}">
           <span class="input-group-btn">
             <button id="search" class="btn btn-default btn-block" type="submit">Go!</button>
           </span>
