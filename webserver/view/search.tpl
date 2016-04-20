@@ -39,7 +39,7 @@
 
     <a> 相关结果{{results["total"]}}个</a>
     % for item in results["hits"]:
-        <a href="show/{{item["_id"]}}">
+        <a href="show/{{item["_id"]}}" target="_blank">
         <dl class="text-left">
                 <dt> {{item["_id"]}}</dt>
                 <dd> {{item["_source"]["symp_text"]}}</dd>
