@@ -31,17 +31,21 @@ class ESentence():
         self.sections.append(x)
 
 class EntityTagger():
-    def __init__(self, edict):
+    def __init__(self, edict, ws_dict_path = "", mode = "doc"):
         self.edict = edict
         self.max_len = 0
         for w in self.edict.words:
             if len(w) > self.max_len:
                 self.max_len = len(w)
         self.fp = None
-        self.ws = WordSeg()
+        if ws_dict_path == "":
+            self.ws = WordSeg()
+        else:
+            self.ws = WordSeg(dict_path = ws_dict_path)
         self.feature = TextFeature()
         startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/cihang/HanLP/hanlp.jar:/home/cihang/HanLP")
         self.dp = JClass("com.hankcs.hanlp.dependency.CRFDependencyParser")
+        self.mode = mode
 
     def word_seg(self, u_str):
         stop_words = [u",", u".", u":", u";", u"!", u"?", u"，", u"。", u"：", u"；" , u"！", u"？", u"、", u"的", u"了", u" "]
@@ -87,7 +91,10 @@ class EntityTagger():
             u_str = u_str[match_len:]
 
     def exact_tag_sen(self, u_str):
-        f_sec = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
+        if self.mode == "query":
+            f_sec = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
+        else:
+            f_sec = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
         pos_tag = {}
         neg_tag = {}
         for sec in f_sec:
@@ -181,7 +188,10 @@ class EntityTagger():
             return 0
 
     def tag_sen_basic(self, u_str):
-        f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
+        if self.mode == "query":
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
+        else:
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
 
         pos_tag = {}
         neg_tag = {}
@@ -219,7 +229,10 @@ class EntityTagger():
         return (pos_tag, neg_tag)
 
     def tag_sen_bisec(self, u_str):
-        f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
+        if self.mode == "query":
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
+        else:
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
         ff = []
         for u_sec in f:
             sf = u_sec.replace(u"、", u",").split(u",")
@@ -272,7 +285,10 @@ class EntityTagger():
         return (pos_tag, neg_tag)
 
     def tag_sen_dp(self, u_str):
-        f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
+        if self.mode == "query":
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
+        else:
+            f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
         ff = []
         for u_sec in f:
             sf = u_sec.replace(u"、", u",").split(u",")
@@ -332,7 +348,10 @@ class EntityTagger():
         return (pos_tag, neg_tag)
 
     def tag_sen_bisec_ld(self, u_str):
-        f = u_str.replace(u"，", u",").split(u",")
+        if self.mode == "query":
+            f = u_str.replace(u"，", u",").replace(u" ", u",").split(u",")
+        else:
+            f = u_str.replace(u"，", u",").split(u",")
 
         pos_tag = {}
         neg_tag = {}
@@ -399,11 +418,12 @@ class EntityTagger():
     def tag(self, u_str, output_file = ""):
         if output_file != "":
             self.fp = open(output_file, "w")
-            print >> self.fp, '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
-            print >> self.fp, '<html>'
-            print >> self.fp, '<style> .possymp{border:2px solid #00f;color:#00a;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;} </style>'
-            print >> self.fp, '<style> .negsymp{border:2px solid #00f;color:#00a;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;text-decoration:line-through;} </style>'
-            print >> self.fp, '<body>'
+            print >> self.fp, '<!DOCTYPE html>\r\n<html lang="zh-CN">'
+            print >> self.fp, '<style> .possymp{border:1px solid #00f;color:#a00;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;} </style>'
+            print >> self.fp, '<style> .negsymp{border:1px solid #00f;color:#a00;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;text-decoration:line-through;} </style>'
+            print >> self.fp, '<head>\r\n<meta charset="utf-8">\r\n<meta http-equiv="X-UA-Compatible" content="IE=edge">\r\n<meta name="viewport" content="width=device-width, initial-scale=1">\r\n<title>bingli-%s</title>\r\n<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">\r\n<script src="/bootstrap/js/jquery.min.js"></script>\r\n<script src="/bootstrap/js/bootstrap.min.js"></script>\r\n<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>\r\n<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>\r\n</head>\r\n<body>' % output_file
+
+            print >> self.fp, '<div style="width:300px;border:1px solid #000;padding:10px 10px 10px 10px;">'
         elif self.fp != None:
             self.fp.close()
             self.fp = None
@@ -427,8 +447,10 @@ class EntityTagger():
                     neg_tag.add(t)
                     if self.fp != None and t not in exact_neg_tag:
                         print >> self.fp, '<span class="negsymp">&nbsp;%s&nbsp;</span>' % t,
-            print >> self.fp, "。"
+            if self.fp != None:
+                print >> self.fp, "。"
         if self.fp != None:
+            print >> self.fp, '</div>'
             print >> self.fp, "</body>\r\n</html>"
             self.fp.close()
             self.fp = None
