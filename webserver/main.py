@@ -10,6 +10,7 @@ import commands
 from entity_dict import *
 from entity_tag import *
 
+global etagger
 etagger = None
 
 def getSearchResult(keywords):
@@ -19,10 +20,13 @@ def getSearchResult(keywords):
     """
     global etagger
 
-    (pos_tag, neg_tag) = etagger.tag(keywords)
+    (pos_tag, neg_tag, polarity_res) = etagger.tag(keywords)
 
+    print "keywords", keywords
     print "pos tag", u" ".join(list(pos_tag))
     print "neg tag", u" ".join(list(neg_tag))
+    for key in polarity_res:
+        print "search.py", key + "\t" + polarity_res[key]
 
     req = ' curl -s -XGET http://127.0.0.1:9200/1461044451/case/_search -d \'%s\''
     query_dict = {}
@@ -33,7 +37,11 @@ def getSearchResult(keywords):
     match_text["match_phrase"]["symp_text"] = {}
     match_text["match_phrase"]["symp_text"]["query"] = keywords
     match_text["match_phrase"]["symp_text"]["slop"] = 2
-    if len(pos_tag | neg_tag) == 0:
+    polarity_flag = True
+    for key in polarity_res:
+        if polarity_res != "":
+            polarity_falg = False
+    if len(pos_tag | neg_tag) == 0 and polarity_flag:
         query_dict["query"]["bool"]["must"] = match_text
     else:
         query_dict["query"]["bool"]["should"] = []
@@ -52,8 +60,17 @@ def getSearchResult(keywords):
             s = tag_bool_query["bool"]["must"][-1]
             s["match"] = {}
             s["match"]["symp_neg_tag"] = tag.encode("utf8")
+        for key in polarity_res:
+            if polarity_res[key] == "":
+                continue
+            print "search.py polarity_res[key]", len(polarity_res[key])
+            tag_bool_query["bool"]["must"].append({})
+            s = tag_bool_query["bool"]["must"][-1]
+            s["match"] = {}
+            s["match"][key] = polarity_res[key].encode("utf8")
 
-    print query_dict
+
+    print json.dumps(query_dict)
         
     '''
     query = {
@@ -99,11 +116,15 @@ def server_static(filename):
 def server_static(filename):
     return static_file(filename, root='./bootstrap/js')
 
+@route('/etagger', method='POST')
+def index():
+    print request.json
+
 
 if __name__ == "__main__":
-    global etagger
     edict = EntityDict("symp")
     edict.load_file("../mining/entity_tag/data/zhichangai_symp.csv")
-    etagger = EntityTagger(edict, "/home/cihang/project/EMR_search_demo_trunk/mining/entity_tag/dict/wordseg_dict/", "query")
+    patternList = Pattern().getPattern()
+    etagger = EntityTagger(edict, patternList, "/home/yongsheng/EMR_search_demo/mining/entity_tag/dict/wordseg_dict/", "query")
 
-    run(host='localhost', port=8080)
+    run(host='0.0.0.0', port=8080)

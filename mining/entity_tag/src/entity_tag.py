@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
+import re
 reload(sys)
 sys.setdefaultencoding('utf-8')
 sys.path.append("/home/cihang/word-seg/src")
@@ -10,6 +11,7 @@ from jpype import *
 import os
 from bs4 import BeautifulSoup
 from parse_yx import *
+from pattern import * 
 
 class EPhrase():
     def __init__(self):
@@ -31,8 +33,9 @@ class ESentence():
         self.sections.append(x)
 
 class EntityTagger():
-    def __init__(self, edict, ws_dict_path = "", mode = "doc"):
+    def __init__(self, edict, epattern, ws_dict_path = "", mode = "doc"):
         self.edict = edict
+        self.epattern = epattern
         self.max_len = 0
         for w in self.edict.words:
             if len(w) > self.max_len:
@@ -43,7 +46,7 @@ class EntityTagger():
         else:
             self.ws = WordSeg(dict_path = ws_dict_path)
         self.feature = TextFeature()
-        startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/cihang/HanLP/hanlp.jar:/home/cihang/HanLP")
+        startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/yongsheng/HanLP/hanlp.jar:/home/yongsheng/HanLP")
         self.dp = JClass("com.hankcs.hanlp.dependency.CRFDependencyParser")
         self.mode = mode
 
@@ -220,7 +223,7 @@ class EntityTagger():
                             neg = False
                     cqr.append(cqr_sort[-1])
             cqr_sort = sorted(cqr)
-            if cqr_sort[-1] > 0.9:
+            if len(cqr_sort) > 0 and cqr_sort[-1] > 0.9:
                 if not neg:
                     pos_tag[e.entity_name] = cqr_sort[-1]
                 if neg:
@@ -276,7 +279,7 @@ class EntityTagger():
                     neg = sec_neg
                 cqr.append(cqr_sort[-1])
             cqr_sort = sorted(cqr)
-            if cqr_sort[-1] > 0.9:
+            if len(cqr_sort) > 0 and cqr_sort[-1] > 0.9:
                 if not neg:
                     pos_tag[e.entity_name] = cqr_sort[-1]
                 if neg:
@@ -339,7 +342,7 @@ class EntityTagger():
                     neg = sec_neg
                 cqr.append(cqr_sort[-1])
             cqr_sort = sorted(cqr)
-            if cqr_sort[-1] > 0.9:
+            if len(cqr) > 0 and cqr_sort[-1] > 0.9:
                 if not neg:
                     pos_tag[e.entity_name] = cqr_sort[-1]
                 if neg:
@@ -387,7 +390,7 @@ class EntityTagger():
                     cqr_sort = sorted(cqr_entrance)
                     cqr.append(cqr_sort[-1])
                 cqr_sort = sorted(cqr)
-                if cqr_sort[-1] > 0.9:
+                if len(cqr_sort) > 0 and cqr_sort[-1] > 0.9:
                     if not neg:
                         pos_tag[e.entity_name] = cqr_sort[-1]
                     if neg:
@@ -415,6 +418,62 @@ class EntityTagger():
 
         return (all_pos_tag, all_neg_tag)
 
+    def get_min_segment(self, pattern, line, seperator):
+        L = line.strip().split(seperator)
+        Index = []
+
+        for i in range(len(L)):
+            for ele in L[i]:
+                Index.append(i)
+            if i != len(L) - 1:
+                Index.append(i)
+       
+        searchObj = re.search(pattern, line)
+        if not searchObj:
+            return ""
+        segment = searchObj.group()
+        begin = Index[line.find(segment)]
+        end = Index[line.find(segment) + len(segment) -1]
+        newL = []
+        i = end
+        while i >= begin:
+            newline = seperator.join(L[i:end+1])
+            searchObj = re.search(pattern, newline)
+            if searchObj:
+                return newline
+            i -= 1
+        return seperator.join(L[begin:end+1])
+
+    def get_range_value(self, u_str):
+        
+        return "" 
+
+    def get_point_value(self, u_str):
+        
+        return ""
+    
+    def get_polarity_value(self, u_str):
+        Res = {}
+        for pattern in self.epattern:
+            if pattern.type_ != "P":
+                 continue
+            tag_yang = self.get_min_segment(pattern.yang, u_str, "，")
+            tag_ying = self.get_min_segment(pattern.ying, u_str, "，")
+            if tag_yang == "" and tag_ying == "":
+                Res[pattern.name] = ""
+                continue
+            if len(tag_yang) > 0 and tag_ying == "":
+                Res[pattern.name] = "阳"
+                continue
+            if len(tag_ying) > 0 and tag_yang == "":
+                Res[pattern.name] = "阴"
+                continue
+            if len(tag_ying) < len(tag_yang):
+                Res[pattern.name] = "阴"
+            else:
+                Res[pattern.name] = "阳"
+        return Res
+
     def tag(self, u_str, output_file = ""):
         if output_file != "":
             self.fp = open(output_file, "w")
@@ -430,6 +489,7 @@ class EntityTagger():
         f_sen = u_str.rstrip(u"\r\n\t ").lstrip("\r\n\t ").split(u"。")
         pos_tag = set()
         neg_tag = set()
+        polarity_res = {}
         for sen in f_sen:
             if sen.lstrip("\r\n\t ").rstrip("\r\n\t ") == u"":
                 continue
@@ -447,6 +507,15 @@ class EntityTagger():
                     neg_tag.add(t)
                     if self.fp != None and t not in exact_neg_tag:
                         print >> self.fp, '<span class="negsymp">&nbsp;%s&nbsp;</span>' % t,
+
+            res = self.get_polarity_value(sen)
+            for key in res:
+                if res[key] != "":
+                    polarity_res[key] = res[key]    
+                if self.fp != None and res[key] != "":
+                    t = key + res[key]
+                    print >> self.fp, '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
+
             if self.fp != None:
                 print >> self.fp, "。"
         if self.fp != None:
@@ -455,13 +524,37 @@ class EntityTagger():
             self.fp.close()
             self.fp = None
 
-        return (pos_tag, neg_tag)
+
+        return (pos_tag, neg_tag, polarity_res)
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")
     edict.load_file("../data/zhichangai_symp.csv")
-    etagger = EntityTagger(edict)
-    #etagger.tag(u"3月余前起无明显诱因下出现大便习惯改变，大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便", "test.html")
+    patternList = Pattern().getPattern()
+    etagger = EntityTagger(edict, patternList)
+    for pattern in etagger.epattern:
+        print pattern.name
+        print pattern.ying
+        print pattern.yang
+        print pattern.type_
+
+
+    s = u"血常规、尿常规无异常，大便潜血（+）"
+    s = u"血常规、尿常规无异常，大便潜血（+），梅毒+HIV（-）"
+    s = u"3月余前起无明显诱因下出现大便习惯改变，大便潜血（+），大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便潜血(+)，梅毒+HIV（-）"
+    s = u"血常规、尿常规无异常，大便潜血（+），梅毒HIV（-）"
+    s = u"血常规、尿常规无异常，大便潜血(-)，梅毒+HIV（-）"
+    s = u"一次，为鲜红色，于大便相混，无粘液、脓性分泌物，偶有头晕，休息后缓解，未予重视，两年前因“胸闷、心悸到当地医院就诊，入院查大便常规发现潜血阳性，后复查潜血阴性，诊断为“1.上消化道出血 2.左肾石症”，予以护胃、改善循环治疗并予出院"
+    s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。"
+    s = u"大便潜血可疑阳性，大便常规正常"
+    s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。"
+    s = "大便潜血阳性"
+
+    (a,b,c) = etagger.tag(s, "test.html")
+    for ele in c:
+        print ele, c[ele]
+    exit(0)
+
     if not os.path.isdir(sys.argv[1]):
         file_name = sys.argv[1]
         bs = BeautifulSoup(open(file_name))
@@ -484,8 +577,15 @@ if __name__ == "__main__":
                 #print his
             elif key == u"医学检查：":
                 check = parse_check(li.p)
-        if his != None and his.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ") != u"":
-            etagger.tag(his, sys.argv[2])
+        text = his.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ") + u"。" + check.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ")
+        #if his != None and his.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ") != u"":
+        #    etagger.tag(his, sys.argv[2])
+        #if check != None and check.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ") != u"":
+        #    etagger.tag(check, sys.argv[2])
+        if text != None and text.lstrip(u"\r\n\t ").rstrip(u"\r\n\t ") != u"":
+            (a,b,c) = etagger.tag(text, sys.argv[2])
+            for ele in c:
+                print ele, c[ele]
         exit(0)
 
     for d in os.listdir(sys.argv[1]):
