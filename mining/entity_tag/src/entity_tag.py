@@ -40,15 +40,16 @@ class EntityTagger():
         for w in self.edict.words:
             if len(w) > self.max_len:
                 self.max_len = len(w)
-        self.fp = None
-        if ws_dict_path == "":
-            self.ws = WordSeg()
-        else:
-            self.ws = WordSeg(dict_path = ws_dict_path)
+        #if ws_dict_path == "":
+        #    self.ws = WordSeg()
+        #else:
+        #    self.ws = WordSeg(dict_path = ws_dict_path)
         self.feature = TextFeature()
-        startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/yongsheng/HanLP/hanlp.jar:/home/yongsheng/HanLP")
+        startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/cihang/HanLP/hanlp.jar:/home/cihang/HanLP")
         self.dp = JClass("com.hankcs.hanlp.dependency.CRFDependencyParser")
         self.mode = mode
+
+        self.mk_str = ""
 
     def word_seg(self, u_str):
         stop_words = [u",", u".", u":", u";", u"!", u"?", u"，", u"。", u"：", u"；" , u"！", u"？", u"、", u"的", u"了", u" "]
@@ -107,21 +108,18 @@ class EntityTagger():
                 for p in phrase_list:
                     if (p.find(u"无") != -1 or p.find(u"未见") != -1 or p.find(u"没有") != -1) and p.find(u"诱因") == -1:
                         neg = True
-                    if self.fp != None:
-                        self.fp.write(p)
+                    self.mk_str += p
                     if p in self.edict.ridx:
                         for e in self.edict.ridx[p]:
-                            if self.fp != None:
-                                if not neg:
-                                    print >> self.fp, '<span class="possymp">&nbsp;%s&nbsp;</span>' % e.entity_name,
-                                if neg:
-                                    print >> self.fp, '<span class="negsymp">&nbsp;%s&nbsp;</span>' % e.entity_name,
+                            if not neg:
+                                self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % e.entity_name
+                            if neg:
+                                self.mk_str += '<span class="negsymp">&nbsp;%s&nbsp;</span>' % e.entity_name
                             if not neg:
                                 pos_tag[e.entity_name] = 1
                             if neg:
                                 neg_tag[e.entity_name] = 1
-            if self.fp != None:
-                print >> self.fp, "，",
+            self.mk_str += "，"
 
         return (pos_tag, neg_tag)
 
@@ -474,18 +472,9 @@ class EntityTagger():
                 Res[pattern.name] = "阳"
         return Res
 
-    def tag(self, u_str, output_file = ""):
-        if output_file != "":
-            self.fp = open(output_file, "w")
-            print >> self.fp, '<!DOCTYPE html>\r\n<html lang="zh-CN">'
-            print >> self.fp, '<style> .possymp{border:1px solid #00f;color:#a00;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;} </style>'
-            print >> self.fp, '<style> .negsymp{border:1px solid #00f;color:#a00;font-size:13px;font-weight:bold;padding:2px 2px 2px 2px;text-decoration:line-through;} </style>'
-            print >> self.fp, '<head>\r\n<meta charset="utf-8">\r\n<meta http-equiv="X-UA-Compatible" content="IE=edge">\r\n<meta name="viewport" content="width=device-width, initial-scale=1">\r\n<title>bingli-%s</title>\r\n<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">\r\n<script src="/bootstrap/js/jquery.min.js"></script>\r\n<script src="/bootstrap/js/bootstrap.min.js"></script>\r\n<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>\r\n<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>\r\n</head>\r\n<body>' % output_file
+    def tag(self, u_str):
+        self.mk_str = ""
 
-            print >> self.fp, '<div style="width:300px;border:1px solid #000;padding:10px 10px 10px 10px;">'
-        elif self.fp != None:
-            self.fp.close()
-            self.fp = None
         f_sen = u_str.rstrip(u"\r\n\t ").lstrip("\r\n\t ").split(u"。")
         pos_tag = set()
         neg_tag = set()
@@ -500,32 +489,25 @@ class EntityTagger():
             for t in fuzzy_pos_tag:
                 if t not in exact_neg_tag:
                     pos_tag.add(t)
-                    if self.fp != None and t not in exact_pos_tag:
-                        print >> self.fp, '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,
+                    if t not in exact_pos_tag:
+                        self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t
             for t in fuzzy_neg_tag:
                 if t not in exact_pos_tag:
                     neg_tag.add(t)
-                    if self.fp != None and t not in exact_neg_tag:
-                        print >> self.fp, '<span class="negsymp">&nbsp;%s&nbsp;</span>' % t,
+                    if t not in exact_neg_tag:
+                        self.mk_str += '<span class="negsymp">&nbsp;%s&nbsp;</span>' % t
 
             res = self.get_polarity_value(sen)
             for key in res:
                 if res[key] != "":
                     polarity_res[key] = res[key]    
-                if self.fp != None and res[key] != "":
+                if res[key] != "":
                     t = key + res[key]
-                    print >> self.fp, '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
+                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t
 
-            if self.fp != None:
-                print >> self.fp, "。"
-        if self.fp != None:
-            print >> self.fp, '</div>'
-            print >> self.fp, "</body>\r\n</html>"
-            self.fp.close()
-            self.fp = None
+            self.mk_str += "。"
 
-
-        return (pos_tag, neg_tag, polarity_res)
+        return (pos_tag, neg_tag, polarity_res, self.mk_str)
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")

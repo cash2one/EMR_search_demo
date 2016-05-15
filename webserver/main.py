@@ -20,7 +20,7 @@ def getSearchResult(keywords):
     """
     global etagger
 
-    (pos_tag, neg_tag, polarity_res) = etagger.tag(keywords)
+    (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(keywords)
 
     print "keywords", keywords
     print "pos tag", u" ".join(list(pos_tag))
@@ -125,6 +125,6 @@ if __name__ == "__main__":
     edict = EntityDict("symp")
     edict.load_file("../mining/entity_tag/data/zhichangai_symp.csv")
     patternList = Pattern().getPattern()
-    etagger = EntityTagger(edict, patternList, "/home/yongsheng/EMR_search_demo/mining/entity_tag/dict/wordseg_dict/", "query")
+    etagger = EntityTagger(edict, patternList, "../mining/entity_tag/dict/wordseg_dict/", "query")
 
-    run(host='0.0.0.0', port=8080)
+    run(host='127.0.0.1', port=8080)
