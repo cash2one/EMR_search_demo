@@ -417,7 +417,8 @@ class EntityTagger():
         return (all_pos_tag, all_neg_tag)
 
     def get_min_segment(self, pattern, line, seperator):
-        L = line.strip().split(seperator)
+        line = line.strip()
+        L = line.split(seperator)
         Index = []
 
         for i in range(len(L)):
