@@ -17,8 +17,8 @@ class EntityDict:
         self.ridx = {}
 
     def load_file(self, d_file):
-        concept_col = [0,1,2]
-        entrance_col = 3
+        concept_col = [0]
+        entrance_col = 1
 
         fp = open(d_file)
         if fp == None:

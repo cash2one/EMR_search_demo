@@ -304,6 +304,7 @@ class EntityTagger():
 
         pos_tag = {}
         neg_tag = {}
+        dp_dict = {}
         for e in self.edict.entities:
             cqr = []
             last_sec_with_n = None
@@ -312,7 +313,11 @@ class EntityTagger():
                 if u_sec.lstrip("\r\n\t ").rstrip("\r\n\t ") == u"":
                     continue
 
-                dp_result = self.dp.compute(u_sec.encode("utf8")).getWordArray()
+                if u_sec in dp_dict:
+                    dp_result = dp_dict[u_sec]
+                else:
+                    dp_result = self.dp.compute(u_sec.encode("utf8")).getWordArray()
+                    dp_dict[u_sec] = dp_result
                 core_tag = None
                 for s in dp_result:
                     if s.toString().split()[7] == u"核心成分":

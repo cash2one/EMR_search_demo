@@ -28,7 +28,7 @@ def getSearchResult(keywords):
     for key in polarity_res:
         print "search.py", key + "\t" + polarity_res[key]
 
-    req = ' curl -s -XGET http://127.0.0.1:9200/1461044451/case/_search -d \'%s\''
+    req = ' curl -s -XGET http://127.0.0.1:9200/20160518/case/_search -d \'%s\''
     query_dict = {}
     query_dict["query"] = {}
     query_dict["query"]["bool"] = {}
@@ -105,7 +105,7 @@ def index():
 
 @route('/show/<id>')
 def index(id):
-    return static_file(id +'.html', root='./html')
+    return static_file(id.split(".")[0] +'.html', root='./html')
 
 
 @route('/bootstrap/css/<filename>')
@@ -127,4 +127,4 @@ if __name__ == "__main__":
     patternList = Pattern().getPattern()
     etagger = EntityTagger(edict, patternList, "../mining/entity_tag/dict/wordseg_dict/", "query")
 
-    run(host='127.0.0.1', port=8080)
+    run(host='0.0.0.0', port=8080)
