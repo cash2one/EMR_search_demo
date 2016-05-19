@@ -102,7 +102,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["surgery"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -125,7 +125,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     res_ret += title_1(u"入院记录")
     if "complain" in bs:
         res_ret += title_2(u"主诉")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["complain"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["complain"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -141,7 +141,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
 
     if "sympton" in bs:
         res_ret += title_2(u"主要症状")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["sympton"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["sympton"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -157,7 +157,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
 
     if "med_his" in bs:
         res_ret += title_2(u"现病史")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["med_his"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["med_his"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -181,7 +181,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
 
     if "med_exam" in bs:
         res_ret += title_2(u"医学检查")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["med_exam"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["med_exam"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -191,13 +191,13 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["med_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
     if "body_exam" in bs:
         res_ret += title_2(u"体格检查")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["body_exam"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["body_exam"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -207,13 +207,13 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["body_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
     if "spec_exam" in bs:
         res_ret += title_2(u"专科检查")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["spec_exam"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["spec_exam"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -223,7 +223,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["spec_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -234,7 +234,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     res_ret += title_1(u"出院记录")
     if "med_exp" in bs:
         res_ret += title_2(u"入院情况及诊疗经过")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["med_exp"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["med_exp"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -244,13 +244,13 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["med_exp"] + "\r\n"
         res_ret += norm_text(mk_str)
     
     if "effect" in bs:
         res_ret += title_2(u"出院情况及治疗效果")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["effect"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["effect"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -260,13 +260,13 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["effect"] + "\r\n"
         res_ret += norm_text(mk_str)
 
     if "diagnosis" in bs:
         res_ret += title_2(u"出院诊断")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["diagnosis"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["diagnosis"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
@@ -276,7 +276,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["diagnosis"] + "\r\n"
         res_ret += norm_text(mk_str)
         

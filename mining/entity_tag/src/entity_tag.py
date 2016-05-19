@@ -475,7 +475,7 @@ class EntityTagger():
                 #print tag_kv[1].group(2)
                 #print tag_kv[1].group(3)
                 s = ""
-                Res[pattern.name] = tag_kv[1].group()
+                Res[pattern.name] = tag_kv[1].group(0)
                 if pattern.digital_index != -1:
                     s = tag_kv[1].group(pattern.digital_index)
                 if s != "":
@@ -547,7 +547,7 @@ class EntityTagger():
                 if res_lower[key] != "":
                     range_res_lower[key] = res_lower[key]
                     range_res_upper[key] = res_upper[key]
-                if self.fp != None and res_lower[key] != "" and res_upper[key] != "":
+                if res_lower[key] != "" and res_upper[key] != "":
                     t = key + res_lower[key] + "-" + res_upper[key]
                     self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,   
           
@@ -557,9 +557,9 @@ class EntityTagger():
                     kv_res[key] = res[key]
                 if key in value:
                     kv_value[key] = value[key]
-                if self.fp != None and res[key] != "":
-                    t = key + ":" + res[key]
-                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
+                if res[key] != "":
+                    t = key + str(res[key])
+                    #self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
 
             self.mk_str += "。"
 
