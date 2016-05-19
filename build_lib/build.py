@@ -46,6 +46,9 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     all_pos_tag = set()
     all_neg_tag = set()
     all_polarity_res = {}
+    all_range_lower = {}
+    all_range_upper = {}
+    all_kv_res = {}
 
     res_ret = start_html(filename)
 
@@ -89,11 +92,17 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     res_ret += title_1(u"治疗方案")
     if "surgery" in bs:
         res_ret += title_2(u"手术")
-        (pos_tag, neg_tag, polarity_res, mk_str) = etagger.tag(bs["surgery"])
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = etagger.tag(bs["surgery"])
         all_pos_tag = all_pos_tag | pos_tag
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["surgery"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -121,6 +130,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["complain"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -131,6 +146,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["sympton"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -141,6 +162,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["med_his"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -159,6 +186,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["med_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -169,6 +202,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["body_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -179,6 +218,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["spec_exam"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -194,6 +239,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["med_exp"] + "\r\n"
         res_ret += norm_text(mk_str)
     
@@ -204,6 +255,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["effect"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -214,6 +271,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         all_neg_tag = all_neg_tag | neg_tag
         for k in polarity_res:
             all_polarity_res[k] = polarity_res[k]
+        for k in range_lower:
+            all_range_lower[k] = range_lower[k]
+        for k in range_upper:
+            all_range_upper[k] = range_upper[k]
+        for k in kv_res:
+            all_kv_res[k] = kv[res]
         res_json_dict["symp_text"] += bs["diagnosis"] + "\r\n"
         res_ret += norm_text(mk_str)
         
@@ -231,6 +294,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     res_json_dict["symp_neg_tag"] = list(all_neg_tag)
     for key in all_polarity_res:
         res_json_dict[key] = all_polarity_res[key]
+    for key in all_range_lower:
+        res_json_dict[key] = all_range_lower[key]
+    for key in all_range_upper:
+        res_json_dict[key] = all_range_upper[key]
+    for key in all_kv_res:
+        res_json_dict[key] = all_kv_res[key]
     res_json = json.dumps(res_json_dict)
     try:
         js = json.loads(res_json.encode('utf8'))
@@ -248,6 +317,12 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
     js["symp_text"] = js["symp_text"].strip()
     for key in all_polarity_res:
         js[key] = all_polarity_res[key]
+    for key in all_range_lower:
+        js[key] = all_range_lower[key]
+    for key in all_range_upper:
+        js[key] = all_range_upper[key]
+    for key in all_kv_res:
+        js[key] = all_kv_res[key]
 
     out_file = os.path.join(outpath, filename.split(".")[0] + ".html")
     out_fp = open(out_file, "w")

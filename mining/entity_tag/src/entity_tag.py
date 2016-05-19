@@ -434,7 +434,7 @@ class EntityTagger():
        
         searchObj = re.search(pattern, line)
         if not searchObj:
-            return ""
+            return ["", ""]
         segment = searchObj.group()
         begin = Index[line.find(segment)]
         end = Index[line.find(segment) + len(segment) -1]
@@ -444,25 +444,52 @@ class EntityTagger():
             newline = seperator.join(L[i:end+1])
             searchObj = re.search(pattern, newline)
             if searchObj:
-                return newline
+                return [newline, searchObj]
             i -= 1
-        return seperator.join(L[begin:end+1])
+        return [seperator.join(L[begin:end+1]), searchObj]
 
     def get_range_value(self, u_str):
-        
-        return "" 
+        Res_lower = {}
+        Res_upper = {}
+        for pattern in self.epattern:
+            if pattern.type_ != "R":
+                 continue
+            tag_range = self.get_min_segment(pattern.range_pattern, u_str, "，")
+            if tag_range[1] != "":
+                Res_lower[pattern.name] = tag_range[1].group(1)
+                Res_upper[pattern.name] = tag_range[1].group(3)
+                
+        return Res_lower, Res_upper 
 
     def get_point_value(self, u_str):
-        
-        return ""
+        Res = {}
+        Value = {}
+        for pattern in self.epattern:
+            if pattern.type_ != "KV":
+                 continue
+            tag_kv = self.get_min_segment(pattern.range_pattern, u_str, "，")
+            if tag_kv[1] != "":
+                #print tag_kv[1].group()
+                #print tag_kv[1].group(0)
+                #print tag_kv[1].group(1)
+                #print tag_kv[1].group(2)
+                #print tag_kv[1].group(3)
+                s = ""
+                Res[pattern.name] = tag_kv[1].group()
+                if pattern.digital_index != -1:
+                    s = tag_kv[1].group(pattern.digital_index)
+                if s != "":
+                    Value[pattern.name] = float(s)
+
+        return Res, Value
     
     def get_polarity_value(self, u_str):
         Res = {}
         for pattern in self.epattern:
             if pattern.type_ != "P":
                  continue
-            tag_yang = self.get_min_segment(pattern.yang, u_str, "，")
-            tag_ying = self.get_min_segment(pattern.ying, u_str, "，")
+            tag_yang = self.get_min_segment(pattern.yang, u_str, "，")[0]
+            tag_ying = self.get_min_segment(pattern.ying, u_str, "，")[0]
             if tag_yang == "" and tag_ying == "":
                 Res[pattern.name] = ""
                 continue
@@ -485,6 +512,10 @@ class EntityTagger():
         pos_tag = set()
         neg_tag = set()
         polarity_res = {}
+        range_res_lower = {}
+        range_res_upper = {}
+        kv_res = {}
+        kv_value = {}
         for sen in f_sen:
             if sen.lstrip("\r\n\t ").rstrip("\r\n\t ") == u"":
                 continue
@@ -511,9 +542,28 @@ class EntityTagger():
                     t = key + res[key]
                     self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t
 
+            [res_lower, res_upper] = self.get_range_value(sen)
+            for key in res_lower:
+                if res_lower[key] != "":
+                    range_res_lower[key] = res_lower[key]
+                    range_res_upper[key] = res_upper[key]
+                if self.fp != None and res_lower[key] != "" and res_upper[key] != "":
+                    t = key + res_lower[key] + "-" + res_upper[key]
+                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,   
+          
+            [res, value] = self.get_point_value(sen)
+            for key in res:
+                if res[key] != "":
+                    kv_res[key] = res[key]
+                if key in value:
+                    kv_value[key] = value[key]
+                if self.fp != None and res[key] != "":
+                    t = key + ":" + res[key]
+                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
+
             self.mk_str += "。"
 
-        return (pos_tag, neg_tag, polarity_res, self.mk_str)
+        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, self.mk_str)
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")
@@ -538,7 +588,7 @@ if __name__ == "__main__":
     s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。"
     s = "大便潜血阳性"
 
-    (a,b,c) = etagger.tag(s, "test.html")
+    (a,b,c,d,e,f,g) = etagger.tag(s)
     for ele in c:
         print ele, c[ele]
     exit(0)
