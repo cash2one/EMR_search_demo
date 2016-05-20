@@ -457,7 +457,7 @@ class EntityTagger():
             tag_range = self.get_min_segment(pattern.range_pattern, u_str, "，")
             if tag_range[1] != "":
                 Res_lower[pattern.name] = tag_range[1].group(1)
-                Res_upper[pattern.name] = tag_range[1].group(3)
+                Res_upper[pattern.name] = tag_range[1].group(2)
                 
         return Res_lower, Res_upper 
 
@@ -539,8 +539,8 @@ class EntityTagger():
                 if res[key] != "":
                     polarity_res[key] = res[key]    
                 if res[key] != "":
-                    t = key + res[key]
-                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t
+                    #t = key + res[key]
+                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
             [res_lower, res_upper] = self.get_range_value(sen)
             for key in res_lower:
@@ -548,8 +548,10 @@ class EntityTagger():
                     range_res_lower[key] = res_lower[key]
                     range_res_upper[key] = res_upper[key]
                 if res_lower[key] != "" and res_upper[key] != "":
-                    t = key + res_lower[key] + "-" + res_upper[key]
-                    self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,   
+                    #t = key + res_lower[key] + "-" + res_upper[key]
+                    #t = "123"
+                    t="-"
+                    self.mk_str += '<span class="possymp">&nbsp;%s%s%s%s&nbsp;</span>' % (key, res_lower[key],t,res_upper[key])
           
             [res, value] = self.get_point_value(sen)
             for key in res:
@@ -558,8 +560,8 @@ class EntityTagger():
                 if key in value:
                     kv_value[key] = value[key]
                 if res[key] != "":
-                    t = key + str(res[key])
-                    #self.mk_str += '<span class="possymp">&nbsp;%s&nbsp;</span>' % t,             
+                    #t = key + str(res[key])
+                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
             self.mk_str += "。"
 
@@ -572,25 +574,29 @@ if __name__ == "__main__":
     etagger = EntityTagger(edict, patternList)
     for pattern in etagger.epattern:
         print pattern.name
-        print pattern.ying
-        print pattern.yang
         print pattern.type_
 
 
     s = u"血常规、尿常规无异常，大便潜血（+）"
     s = u"血常规、尿常规无异常，大便潜血（+），梅毒+HIV（-）"
-    s = u"3月余前起无明显诱因下出现大便习惯改变，大便潜血（+），大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便潜血(+)，梅毒+HIV（-）"
     s = u"血常规、尿常规无异常，大便潜血（+），梅毒HIV（-）"
     s = u"血常规、尿常规无异常，大便潜血(-)，梅毒+HIV（-）"
     s = u"一次，为鲜红色，于大便相混，无粘液、脓性分泌物，偶有头晕，休息后缓解，未予重视，两年前因“胸闷、心悸到当地医院就诊，入院查大便常规发现潜血阳性，后复查潜血阴性，诊断为“1.上消化道出血 2.左肾石症”，予以护胃、改善循环治疗并予出院"
     s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。"
     s = u"大便潜血可疑阳性，大便常规正常"
-    s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。"
+    s = u"3月余前起无明显诱因下出现大便习惯改变，大便潜血（+），大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便潜血(+)，梅毒+HIV（-）"
     s = "大便潜血阳性"
+    s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。CA19-9 12.34U/ml"
 
     (a,b,c,d,e,f,g) = etagger.tag(s)
     for ele in c:
         print ele, c[ele]
+    for ele in d:
+        print ele, d[ele]
+    for ele in e:
+        print ele, e[ele]
+    for ele in f:
+        print ele, f[ele]
     exit(0)
 
     if not os.path.isdir(sys.argv[1]):

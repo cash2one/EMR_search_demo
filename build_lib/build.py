@@ -3,6 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 sys.path.append("../mining/entity_tag/src/")
+sys.path.append("../webserver/")
 import os
 import json
 import commands
@@ -10,6 +11,7 @@ from entity_tag import *
 from entity_dict import *
 from emr_preprocessor import EMRPreproc
 from pool import MultiPool
+from config import Config
 import traceback
 
 def start_html(d):
@@ -135,7 +137,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["complain"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -151,7 +153,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["sympton"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -167,7 +169,7 @@ def doTask( etagger, batch, emr_preproc, bs, filename, outpath):
         for k in range_upper:
             all_range_upper[k] = range_upper[k]
         for k in kv_res:
-            all_kv_res[k] = kv[res]
+            all_kv_res[k] = kv_res[k]
         res_json_dict["symp_text"] += bs["med_his"] + "\r\n"
         res_ret += norm_text(mk_str)
 
@@ -354,6 +356,9 @@ if __name__ == "__main__":
     outpath = sys.argv[2]
     batch = sys.argv[3]
 
+    config = Config("../webserver/conf/search.conf")
+    config.set('search', 'batch', batch)
+    config.save()
     '''
     etaggers = []
     for i in range(0, thread_num):
