@@ -48,14 +48,38 @@
         
     % end
 
+    <!--code for pagenation-->
+    <%
+        pageSize = 10
+        pageNum = (int(results["total"]) + 9)/10
+        currentPage = (pn+9)/pageSize
+        currentPage = currentPage if currentPage > 1 else 1
+        currentPage = currentPage if currentPage < pageNum else pageNum
+        startPage = (currentPage-5) if (currentPage-5) > 1 else 1
+        endPage =  startPage + 10
+        endPage = endPage if endPage < pageNum else pageNum
+        prePage = currentPage-1
+        nextPage = currentPage+1
+    %>
+
 	<ul class="pagination">
-	  <li><a href="#">&laquo;</a></li>
-	  <li><a href="#">1</a></li>
-	  <li><a href="#">2</a></li>
-	  <li><a href="#">3</a></li>
-	  <li><a href="#">4</a></li>
-	  <li><a href="#">5</a></li>
-	  <li><a href="#">&raquo;</a></li>
+      % if prePage < 1:
+        <li><a>&laquo;</a></li>
+      % else:
+        <li><a href="search?keywords={{keywords}}&pn={{prePage}}">&laquo;</a></li>
+      % end
+      % for index in range(startPage, endPage):
+        % if index == currentPage:
+            <li class="active"><a>{{index}}<span class="sr-only">(current)</span></a></li>
+        % else:
+            <li><a href="search?keywords={{keywords}}&pn={{index*10}}">{{index}}</a></li>
+        % end
+      % end
+      % if nextPage > pageNum:
+	    <li><a>&raquo;</a></li>
+      % else:
+	    <li><a href="search?keywords={{keywords}}&pn={{nextPage}}">&raquo;</a></li>
+      % end
 	</ul>
     </div>
 

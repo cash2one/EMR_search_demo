@@ -18,11 +18,28 @@ SEARCH_TYPE = config.get("search", "type")
 global etagger
 etagger = None
 
-def getSearchResult(keywords):
+
+def queryBuilder(keywords):
     """
     @input keywords
-    @return search List
+    @output query in json 
     """
+    #sample
+    '''
+    query = {
+        "query":{
+            "bool":{
+                "must": { "match": {"symp_tag":must}},
+                "must_not": {"match": {"symp_text": must_not}},
+                "should": [
+                    {"match":{"symp_text":should_1}},
+                    {"match":{"symp_text":should_2}}
+                ]
+            }
+        }
+    }
+    '''
+
     global etagger
 
     (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, kvs_res, mk_str) = etagger.tag(keywords)
@@ -33,9 +50,6 @@ def getSearchResult(keywords):
     for key in polarity_res:
         print "search.py", key + "\t" + polarity_res[key]
 
-    baseUrl = "http://%(host)s/%(batch)s/%(type)s/_search" %{"host":SEARCH_HOST, "batch":BATCH, "type":SEARCH_TYPE}
-
-    req = ' curl -s -XGET '+ baseUrl + ' -d \'%s\''
     query_dict = {}
     query_dict["query"] = {}
     query_dict["query"]["bool"] = {}
@@ -78,22 +92,24 @@ def getSearchResult(keywords):
 
 
     print json.dumps(query_dict)
-        
-    '''
-    query = {
-        "query":{
-            "bool":{
-                "must": { "match": {"symp_tag":must}},
-                "must_not": {"match": {"symp_text": must_not}},
-                "should": [
-                    {"match":{"symp_text":should_1}},
-                    {"match":{"symp_text":should_2}}
-                ]
-            }
-        }
-    }
-    '''
-    cmd = req % (json.dumps(query_dict))
+    return query_dict
+ 
+
+def getSearchResult(keywords, pn):
+    """
+    @input keywords
+    @return search List
+    """
+       
+    baseUrl = "http://%(host)s/%(batch)s/%(type)s/_search" %{"host":SEARCH_HOST, "batch":BATCH, "type":SEARCH_TYPE}
+
+    req = ' curl -s -XGET '+ baseUrl + ' -d \'%s\''
+
+    query = queryBuilder(keywords)
+    pn = (pn/10)*10
+    query["from"] = 0 if pn == 0 else (pn-10)
+    query["size"] = 10
+    cmd = req % (json.dumps(query))
     ret, res = commands.getstatusoutput(cmd)
     
     res = json.loads(res)
@@ -107,8 +123,12 @@ def index():
 @route('/search')
 def index():
     keywords = request.query.get('keywords')
-    results = getSearchResult(keywords)
-    return template('view/search', keywords = keywords, results= results)
+    pn = 10
+    pageSize = 10
+    if 'pn' in request.query:
+        pn = int(request.query.get('pn'))
+    results = getSearchResult(keywords, pn)
+    return template('view/search', keywords = keywords, pn = pn, results= results)
 
 @route('/show/<id>')
 def index(id):
