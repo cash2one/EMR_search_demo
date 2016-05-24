@@ -25,14 +25,15 @@ def getSearchResult(keywords):
     """
     global etagger
 
-    (pos_tag, neg_tag, polarity_res) = etagger.tag(keywords)
+    (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, kvs_res, mk_str) = etagger.tag(keywords)
 
     print "keywords", keywords
     print "pos tag", u" ".join(list(pos_tag))
     print "neg tag", u" ".join(list(neg_tag))
     for key in polarity_res:
         print "search.py", key + "\t" + polarity_res[key]
-    baseUrl = 'http://%(host)/%(batch)/%(type)/_search' %('host':SEARCH_HOST, 'batch':BATCH, 'type':SEARCH_TYPE)
+
+    baseUrl = "http://%(host)s/%(batch)s/%(type)s/_search" %{"host":SEARCH_HOST, "batch":BATCH, "type":SEARCH_TYPE}
 
     req = ' curl -s -XGET '+ baseUrl + ' -d \'%s\''
     query_dict = {}

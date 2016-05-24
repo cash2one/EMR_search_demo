@@ -482,6 +482,30 @@ class EntityTagger():
                     Value[pattern.name] = float(s)
 
         return Res, Value
+   
+    def get_multi_value(self, u_str):
+        Res = {}
+        Value = {}
+        for pattern in self.epattern:
+            if pattern.type_ != "KVS":
+                continue
+            tag_kv = self.get_min_segment(pattern.regex, u_str, "，")
+            if tag_kv[1] != "":
+                s = ""
+                Res[pattern.name] = tag_kv[1].group(0)
+                Value[pattern.name] = []
+                if pattern.digital_index1 != -1:
+                    s = tag_kv[1].group(pattern.digital_index1)
+                if s != "":
+                    s = s.replace("^", "e")
+                    Value[pattern.name].append(float(s))
+                if pattern.digital_index2 != -1:
+                    s = tag_kv[1].group(pattern.digital_index2)
+                if s != "":
+                    s = s.replace("^", "e")
+                    Value[pattern.name].append(float(s))
+                    
+        return Res, Value
     
     def get_polarity_value(self, u_str):
         Res = {}
@@ -516,6 +540,8 @@ class EntityTagger():
         range_res_upper = {}
         kv_res = {}
         kv_value = {}
+        kvs_res = {}
+        kvs_value = {}
         for sen in f_sen:
             if sen.lstrip("\r\n\t ").rstrip("\r\n\t ") == u"":
                 continue
@@ -539,7 +565,6 @@ class EntityTagger():
                 if res[key] != "":
                     polarity_res[key] = res[key]    
                 if res[key] != "":
-                    #t = key + res[key]
                     self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
             [res_lower, res_upper] = self.get_range_value(sen)
@@ -548,8 +573,6 @@ class EntityTagger():
                     range_res_lower[key] = res_lower[key]
                     range_res_upper[key] = res_upper[key]
                 if res_lower[key] != "" and res_upper[key] != "":
-                    #t = key + res_lower[key] + "-" + res_upper[key]
-                    #t = "123"
                     t="-"
                     self.mk_str += '<span class="possymp">&nbsp;%s%s%s%s&nbsp;</span>' % (key, res_lower[key],t,res_upper[key])
           
@@ -560,12 +583,23 @@ class EntityTagger():
                 if key in value:
                     kv_value[key] = value[key]
                 if res[key] != "":
-                    #t = key + str(res[key])
                     self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
+
+            [res, value] = self.get_multi_value(sen)
+            for key in res:
+                if res[key] != "":
+                    kvs_res[key] = res[key]
+                    print res[key]
+                if key in value:
+                    kvs_value[key] = value[key]
+                    print value[key]
+                if res[key] != "":
+                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
+
 
             self.mk_str += "。"
 
-        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, self.mk_str)
+        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, kvs_res, self.mk_str)
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")
@@ -587,16 +621,20 @@ if __name__ == "__main__":
     s = u"3月余前起无明显诱因下出现大便习惯改变，大便潜血（+），大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便潜血(+)，梅毒+HIV（-）"
     s = "大便潜血阳性"
     s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。CA19-9 12.34U/ml"
+    s = u"血常规,WBC 14.35 x 10^9/L,NEU 0.735"
 
-    (a,b,c,d,e,f,g) = etagger.tag(s)
+    (a,b,c,d,e,f,g,h) = etagger.tag(s)
     for ele in c:
         print ele, c[ele]
     for ele in d:
         print ele, d[ele]
     for ele in e:
         print ele, e[ele]
+    print "len(f)", len(f)
     for ele in f:
-        print ele, f[ele]
+        print "f",ele, f[ele]
+    for ele in g:
+        print "g",ele, g[ele]
     exit(0)
 
     if not os.path.isdir(sys.argv[1]):
