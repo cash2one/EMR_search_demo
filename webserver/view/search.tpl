@@ -52,7 +52,7 @@
     <%
         pageSize = 10
         pageNum = (int(results["total"]) + 9)/10
-        currentPage = (pn+9)/pageSize
+        currentPage = (pn+10)/pageSize
         currentPage = currentPage if currentPage > 1 else 1
         currentPage = currentPage if currentPage < pageNum else pageNum
         startPage = (currentPage-5) if (currentPage-5) > 1 else 1
@@ -63,22 +63,22 @@
     %>
 
 	<ul class="pagination">
-      % if prePage < 1:
+      % if prePage < 1 or currentPage == 1:
         <li><a>&laquo;</a></li>
       % else:
-        <li><a href="search?keywords={{keywords}}&pn={{prePage}}">&laquo;</a></li>
+        <li><a href="search?keywords={{keywords}}&pn={{prePage*10 - 10}}">&laquo;</a></li>
       % end
-      % for index in range(startPage, endPage):
+      % for index in range(startPage, endPage+1):
         % if index == currentPage:
             <li class="active"><a>{{index}}<span class="sr-only">(current)</span></a></li>
         % else:
-            <li><a href="search?keywords={{keywords}}&pn={{index*10}}">{{index}}</a></li>
+            <li><a href="search?keywords={{keywords}}&pn={{index*10 - 10}}">{{index}}</a></li>
         % end
       % end
-      % if nextPage > pageNum:
+      % if nextPage > pageNum or currentPage == pageNum:
 	    <li><a>&raquo;</a></li>
       % else:
-	    <li><a href="search?keywords={{keywords}}&pn={{nextPage}}">&raquo;</a></li>
+	    <li><a href="search?keywords={{keywords}}&pn={{nextPage*10 - 10}}">&raquo;</a></li>
       % end
 	</ul>
     </div>
