@@ -589,10 +589,8 @@ class EntityTagger():
             for key in res:
                 if res[key] != "":
                     kvs_res[key] = res[key]
-                    print res[key]
                 if key in value:
                     kvs_value[key] = value[key]
-                    print value[key]
                 if res[key] != "":
                     self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
@@ -621,7 +619,11 @@ if __name__ == "__main__":
     s = u"3月余前起无明显诱因下出现大便习惯改变，大便潜血（+），大便次数增多，约5-8次/天，初大便稀烂，黄色，无粘液、血便，间中有腹痛，下腹部明显，多为隐痛，无向他处放射，到当医院中医就诊予以对症治疗后（具体不详）症状无明显好转。半月余前到就诊，行肠镜检查考虑直肠癌（报告未回）。今为进一步治疗拟“直肠癌”收入我科。起病以来，无发热、盗汗、咳嗽、咳痰、肛门停止排气排便、呕吐、身目黄染。精神、睡眠均佳，食欲良好，大便潜血(+)，梅毒+HIV（-）"
     s = "大便潜血阳性"
     s = u"血常规：Hb103g/L，WBC6.83×109/L，PLT268×109/L。大便潜血可疑阳性，大便常规正常。尿常规正常。CA19-9 12.34U/ml"
+    s = u"[2010-01-16]查血常规，HGB65g/L胃镜未见明显异常 2、[2010-01-16]血常规，WBC 8.41×10^9/L，HB 65g/L，生化组合示，钠，133mmol/L，钙，1.87mmol/L， 肝功能，ALB，25.7g/L， 2010-01-16，电子胃镜，食管、胃及十二指肠未见异常"
     s = u"血常规,WBC 14.35 x 10^9/L,NEU 0.735"
+    s = u"WBC 8.41×10^9/L"
+    s = u"(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
+    s = u"血清糖链抗原(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
 
     (a,b,c,d,e,f,g,h) = etagger.tag(s)
     for ele in c:
@@ -630,7 +632,11 @@ if __name__ == "__main__":
         print ele, d[ele]
     for ele in e:
         print ele, e[ele]
+    print "len(c)", len(f)
+    print "len(d)", len(f)
+    print "len(e)", len(f)
     print "len(f)", len(f)
+    print "len(g)", len(f)
     for ele in f:
         print "f",ele, f[ele]
     for ele in g:
