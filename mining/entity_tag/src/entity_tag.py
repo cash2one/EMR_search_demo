@@ -585,19 +585,19 @@ class EntityTagger():
                 if res[key] != "":
                     self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
-            [res, value] = self.get_multi_value(sen)
-            for key in res:
-                if res[key] != "":
-                    kvs_res[key] = res[key]
-                if key in value:
-                    kvs_value[key] = value[key]
-                if res[key] != "":
-                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
+#            [res, value] = self.get_multi_value(sen)
+#            for key in res:
+#                if res[key] != "":
+#                    kvs_res[key] = res[key]
+#                if key in value:
+#                    kvs_value[key] = value[key]
+#                if res[key] != "":
+#                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
 
 
             self.mk_str += "。"
 
-        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, kvs_res, self.mk_str)
+        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, self.mk_str)
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")
@@ -625,7 +625,7 @@ if __name__ == "__main__":
     s = u"(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
     s = u"血清糖链抗原(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
 
-    (a,b,c,d,e,f,g,h) = etagger.tag(s)
+    (a,b,c,d,e,f,h) = etagger.tag(s)
     for ele in c:
         print ele, c[ele]
     for ele in d:
@@ -639,8 +639,6 @@ if __name__ == "__main__":
     print "len(g)", len(f)
     for ele in f:
         print "f",ele, f[ele]
-    for ele in g:
-        print "g",ele, g[ele]
     exit(0)
 
     if not os.path.isdir(sys.argv[1]):

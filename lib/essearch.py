@@ -45,7 +45,7 @@ class ESSearch:
             }
         }
         '''
-        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, kvs_res, mk_str) = self.etagger.tag(keywords)
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = self.etagger.tag(keywords)
 
         print "keywords", keywords
         print "pos tag", u" ".join(list(pos_tag))

@@ -28,6 +28,41 @@ global es
 def index():
     return template('view/index')
 
+@route('/startup')
+def index():
+    return template('view/startup')
+
+@route('/createProject')
+def index():
+    return template('view/create_project')
+
+@route('/selectIndicator')
+def index():
+    #参数要带projectId,校验projectId是否存在
+
+    #input = request.json
+    print request
+    return template('view/select_indicator')
+
+@route('/listProject')
+def index():
+    print request
+
+@route('/editSearchResult')
+def index():
+    print request
+    #参数要带projectId
+    #1.根据EMR_id, 查询EMR_full表，获取EMR_text, 展现在左侧
+    #2.根据EMR_id, 查询EMR_indicator表，获取indicator, value，展现在右侧
+    #3.保存按钮,提交修改的数据到EMR_indicator
+
+@route('/exportIndicator')
+def index():
+    print request
+    #参数要带projectId
+    #1.根据projectId，查询project_EMR, EMR_indicator, project_indicator表，生产web报表，并且异步写成xls
+    #2.导出按钮提供下载
+ 
 @route('/search')
 def index():
     keywords = request.query.get('keywords')
@@ -53,11 +88,18 @@ def server_static(filename):
 def server_static(filename):
     return static_file(filename, root='./bootstrap/js')
 
+@route('/select2/<filePath:path>')
+def server_static(filePath):
+    return static_file(filePath, root='./select2/')
+
+
+
 @route('/etagger', method='POST')
 def index():
     input = request.json
-    es.etagger.tag(input['input'], input['output'])
-
+    a,b,c,d,e,f,h = es.etagger.tag(input['input'])
+    print h
+    return h
 
 if __name__ == "__main__":
     es = ESSearch(SEARCH_HOST)
