@@ -577,6 +577,7 @@ class EntityTagger():
                     self.mk_str += '<span class="possymp">&nbsp;%s%s%s%s&nbsp;</span>' % (key, res_lower[key],t,res_upper[key])
           
             [res, value] = self.get_point_value(sen)
+            res, value = xiaoqi(res, value)
             for key in res:
                 if res[key] != "":
                     kv_res[key] = res[key]
@@ -597,16 +598,33 @@ class EntityTagger():
 
             self.mk_str += "。"
 
-        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_res, self.mk_str)
+        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_value, self.mk_str)
+ 
+def xiaoqi(res, value):
+    wrong_keys = []
+    for key in res:
+        if key.endswith("#"):
+            prefix = key[:-1]
+            wrong_keys.append(prefix + "%")
+        if "htc" in value:
+            if value["htc"] >  1.0:
+                wrong_keys.append("htc")
+    for key in wrong_keys:
+        if key in res:
+            del res[key]
+        if key in value:
+            del value[key]
+
+    return res, value
                 
 if __name__ == "__main__":
     edict = EntityDict("symp")
     edict.load_file("../data/zhichangai_symp.csv")
     patternList = Pattern().getPattern()
     etagger = EntityTagger(edict, patternList)
-    for pattern in etagger.epattern:
-        print pattern.name
-        print pattern.type_
+    #for pattern in etagger.epattern:
+    #    print pattern.name
+    #    print pattern.type_
 
 
     s = u"血常规、尿常规无异常，大便潜血（+）"
@@ -624,6 +642,8 @@ if __name__ == "__main__":
     s = u"WBC 8.41×10^9/L"
     s = u"(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
     s = u"血清糖链抗原(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
+    s = u"白细胞计数 78.8g/L,HGB 98g/L,,RBC4.15×1012/L, 血常规WBC9.37×109/L, NEUT# 0.15↓ x10^9/L,"
+    s = u"PCT0.05ng/ml,RDW 19.7:,余无明显异常,MCHC 302g/l,,MCV 109.4fl MCH 36.6PgMCHC ,HCT0.303 RBC3032×1012/L,LYMPH 1.18×109/L,HGB 139g/L,白细胞计数 78.8g/L,HGB 98g/L,,RBC4.15×1012/L, 血常规WBC9.37×109/L, NEUT% 0.15,"
 
     (a,b,c,d,e,f,h) = etagger.tag(s)
     for ele in c:
@@ -632,13 +652,8 @@ if __name__ == "__main__":
         print ele, d[ele]
     for ele in e:
         print ele, e[ele]
-    print "len(c)", len(f)
-    print "len(d)", len(f)
-    print "len(e)", len(f)
-    print "len(f)", len(f)
-    print "len(g)", len(f)
     for ele in f:
-        print "f",ele, f[ele]
+        print ele, f[ele]
     exit(0)
 
     if not os.path.isdir(sys.argv[1]):
