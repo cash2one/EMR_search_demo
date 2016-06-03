@@ -71,9 +71,13 @@ def index():
     if 'pn' in request.query:
         pn = int(request.query.get('pn'))
         pn = (pn/10)*10
-
+    indicatorRange = {}
+    for k in request.query:
+        if k != 'keywords' and k != 'projectid' and k != 'pn':
+            indicatorRange[k] = request.query.get(k).split(":")
+ 
     #call search in essearch in lib/essearch.py
-    results = es.search(keywords, BATCH, SEARCH_TYPE, pn, pageSize)
+    results = es.search(keywords, indicatorRange, BATCH, SEARCH_TYPE, pn, pageSize)
     return template('view/search', keywords = keywords, pn = pn, results= results)
 
 @route('/show/<id>')

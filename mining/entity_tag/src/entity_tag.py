@@ -509,11 +509,12 @@ class EntityTagger():
     
     def get_polarity_value(self, u_str):
         Res = {}
+        u_str_new = u_str.replace(u",", u"，")
         for pattern in self.epattern:
             if pattern.type_ != "P":
                  continue
-            tag_yang = self.get_min_segment(pattern.yang, u_str, "，")[0]
-            tag_ying = self.get_min_segment(pattern.ying, u_str, "，")[0]
+            tag_yang = self.get_min_segment(pattern.yang, u_str_new, u"，")[0]
+            tag_ying = self.get_min_segment(pattern.ying, u_str_new, u"，")[0]
             if tag_yang == "" and tag_ying == "":
                 Res[pattern.name] = ""
                 continue
@@ -565,7 +566,7 @@ class EntityTagger():
                 if res[key] != "":
                     polarity_res[key] = res[key]    
                 if res[key] != "":
-                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
+                    self.mk_str += '<span class="possymp">&nbsp;%s_%s&nbsp;</span>' % (key, res[key])
 
             [res_lower, res_upper] = self.get_range_value(sen)
             for key in res_lower:
@@ -584,7 +585,7 @@ class EntityTagger():
                 if key in value:
                     kv_value[key] = value[key]
                 if res[key] != "":
-                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
+                    self.mk_str += '<span class="possymp">&nbsp;%s_%s&nbsp;</span>' % (key, res[key])
 
 #            [res, value] = self.get_multi_value(sen)
 #            for key in res:
@@ -609,6 +610,8 @@ def xiaoqi(res, value):
         if "htc" in value:
             if value["htc"] >  1.0:
                 wrong_keys.append("htc")
+        if "ApoA1/ApoB" in value:
+            wrong_keys.append("ApoB")
     for key in wrong_keys:
         if key in res:
             del res[key]
@@ -644,7 +647,16 @@ if __name__ == "__main__":
     s = u"血清糖链抗原(carbohydrate antigen,CA)19-9为187,68 U,ml,血清甲胎蛋白(α-fetoprotein,AFP)为3484,61 ng,ml,血清癌胚抗原为6,25 ng,ml。"
     s = u"白细胞计数 78.8g/L,HGB 98g/L,,RBC4.15×1012/L, 血常规WBC9.37×109/L, NEUT# 0.15↓ x10^9/L,"
     s = u"PCT0.05ng/ml,RDW 19.7:,余无明显异常,MCHC 302g/l,,MCV 109.4fl MCH 36.6PgMCHC ,HCT0.303 RBC3032×1012/L,LYMPH 1.18×109/L,HGB 139g/L,白细胞计数 78.8g/L,HGB 98g/L,,RBC4.15×1012/L, 血常规WBC9.37×109/L, NEUT% 0.15,"
+    s = u"前白蛋白0 mg/l,,GLB 33g/L,TBIL 272.3umol/L,,+血脂“ALB19g/L,TP64g/L,直接胆红素188.6μmol/L,ALP529U/L,r-GT, 116 U/L,ALT50U/L,AST32U/L,"
+    s = u" BUN:13.0mmol/l,Cr:123umol/l。, ApoA1/ApoB 0.87,ApoA11.23g/L,,ApoA1 2,57g/L,,LDL-C 3.4mmol/L,HDL-C 1.0mmol/L,,血脂检查提示,TC 5.38mmol/L;TG 2.53mmol/L。当地治疗情况不详。"
+    s = u"CK70U/L, CKMB43U/L。肝酶组合提示LDH893U/L,CO3- 27.8mmol/L,,生化Cr120umol/l、UA596mmol/l、Na146mmol/l、K4.5mmol/l,"
+    s = u"CK 51U/L,CK-MB 8.8U/L,HBDH,羟丁酸脱氢酶, 162U/L,"
+    s = u"生化Cr120umol/l、UA596mmol/l、Na146mmol/l、K4.5mmol/l,肝功能及血脂正常,"
+    s = u"尿胆原1+, 尿胆原16umol/l,尿比重正常 1.010,,LYMPH,:0.038,Hb 108g/L,尿酸碱度5.0  ,复查生化示,CO2 13mmol/L,,Ca2.45mmol/L,Na120mmol/L,K3.8mmol/L,Cl 90mmol/L,Glu8.8mmol/L,"
+    s = u"酮体-,尿胆红素+,尿糖-,尿白细胞,-,,尿隐血-。尿隐血150/ul,尿蛋白0.75g/l,尿PH5.0,"
+    s = u"ERY+.PRO(-), 给予急查血常规提示WBC 6.11，10E9/L，"
 
+    print s
     (a,b,c,d,e,f,h) = etagger.tag(s)
     for ele in c:
         print ele, c[ele]

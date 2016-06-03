@@ -86,9 +86,10 @@ class EMRPreproc:
         for line in u_text.split(u"\n"):
             norm_line = line.rstrip(u"\r\n").replace(u"：", u":")
             if norm_line in self.yx_title_dict:
-                tag = self.yx_title_dict[norm_line]
-                if tag == "#":
+                new_tag = self.yx_title_dict[norm_line]
+                if new_tag == "#":
                     continue
+                tag = new_tag
                 ret_struct[tag] = ""
                 curr_tag = tag
                 continue

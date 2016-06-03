@@ -23,7 +23,7 @@ class ESSearch:
     def tag(self, *args):
         return self.etagger.tag(args)
 
-    def queryBuilder(self, keywords):
+    def queryBuilder(self, keywords, indicatorRange = {}):
         """
         @input keywords
         @output query in json
@@ -92,7 +92,14 @@ class ESSearch:
                 s = tag_bool_query["bool"]["must"][-1]
                 s["match"] = {}
                 s["match"][key] = polarity_res[key].encode("utf8")
-
+        ranges = {}
+        for indicator in indicatorRange:
+            sub = {}
+            sub['from'] = float(indicatorRange[indicator][0])
+            sub['to'] = float(indicatorRange[indicator][1])
+            ranges[indicator] = sub
+        if len(ranges) > 0:
+            query_dict["query"]["bool"]["filter"] = {'range':ranges}
 
         print json.dumps(query_dict)
         return query_dict
@@ -100,8 +107,10 @@ class ESSearch:
     def processResult(self, res):
         return res['hits']
 
-    def search(self, keywords, index, doc_type, start = 0, size = 10):
-        query = self.queryBuilder(keywords)
+    def search(self, keywords, indicatorRange, index, doc_type, start = 0, size = 10):
+        #indicatorRange
+        #{'血常规':['1.2', '2.4'], ...}
+        query = self.queryBuilder(keywords, indicatorRange)
         response = self.es.search(index=index, doc_type = doc_type, body=query, from_ = start, size = size)
         return self.processResult(response)
 
