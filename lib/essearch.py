@@ -5,23 +5,15 @@ reload(sys)
 
 import json
 import commands
-from entity_dict import *
-from entity_tag import *
 from elasticsearch import Elasticsearch
 
 class ESSearch:
-    def __init__(self, hosts):
+    def __init__(self, hosts, tagfunc):
         self.es = Elasticsearch(hosts)
-        self.etagger = None
-
-    def initEtagger(self, entityDictName, entityDict, wordsegDict, mode):
-        edict = EntityDict(entityDictName)
-        edict.load_file(entityDict)
-        patternList = Pattern().getPattern()
-        self.etagger = EntityTagger(edict, patternList, wordsegDict, mode)
+        self.tagfunc = tagfunc
 
     def tag(self, *args):
-        return self.etagger.tag(args)
+        return self.tagfunc(*args)
 
     def queryBuilder(self, keywords, indicatorRange = {}):
         """
@@ -45,7 +37,7 @@ class ESSearch:
             }
         }
         '''
-        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = self.etagger.tag(keywords)
+        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = self.tag(keywords, 'query')
 
         print "keywords", keywords
         print "pos tag", u" ".join(list(pos_tag))
@@ -65,7 +57,7 @@ class ESSearch:
         for key in polarity_res:
             if polarity_res != "":
                 polarity_falg = False
-        if len(pos_tag | neg_tag) == 0 and polarity_flag:
+        if len(pos_tag) == 0 and len(neg_tag) == 0 and polarity_flag:
             query_dict["query"]["bool"]["must"] = match_text
         else:
             query_dict["query"]["bool"]["should"] = []
@@ -116,10 +108,9 @@ class ESSearch:
 
    
 if __name__ == "__main__":
-    es = ESSearch(["127.0.0.1"])
-
-
-
-
-
-
+    import zerorpc
+    client = zerorpc.Client()
+    client.connect("tcp://192.168.1.100:9999")
+    es = ESSearch("127.0.0.1:9200", client.tag)
+    print es.tag("便血", 'query')
+    client.close()

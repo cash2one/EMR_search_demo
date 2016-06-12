@@ -22,8 +22,8 @@ class Tagger(object):
         patternList = Pattern().getPattern_bak()
         self.tagger = EntityTagger(edict, patternList, "../mining/entity_tag/dict/wordseg_dict/")
 
-    def tag(self, txt):
-        return self.tagger.tag(txt)
+    def tag(self, txt, mode):
+        return self.tagger.tag(txt, mode)
 
 if __name__ == "__main__":
     pool_size = 6

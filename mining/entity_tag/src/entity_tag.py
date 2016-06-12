@@ -94,8 +94,8 @@ class EntityTagger():
                 return ret_list
             u_str = u_str[match_len:]
 
-    def exact_tag_sen(self, u_str):
-        if self.mode == "query":
+    def exact_tag_sen(self, u_str, mode="doc"):
+        if mode == "query":
             f_sec = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
         else:
             f_sec = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
@@ -188,8 +188,8 @@ class EntityTagger():
         else:
             return 0
 
-    def tag_sen_basic(self, u_str):
-        if self.mode == "query":
+    def tag_sen_basic(self, u_str, mode="doc"):
+        if mode == "query":
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
         else:
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
@@ -229,8 +229,8 @@ class EntityTagger():
                     
         return (pos_tag, neg_tag)
 
-    def tag_sen_bisec(self, u_str):
-        if self.mode == "query":
+    def tag_sen_bisec(self, u_str, mode="doc"):
+        if mode == "query":
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
         else:
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
@@ -285,8 +285,8 @@ class EntityTagger():
 
         return (pos_tag, neg_tag)
 
-    def tag_sen_dp(self, u_str):
-        if self.mode == "query":
+    def tag_sen_dp(self, u_str, mode="doc"):
+        if mode == "query":
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").replace(u" ", u",").split(u",")
         else:
             f = u_str.replace(u"，", u",").replace(u"：", u",").replace(u"；", u",").replace(u":", u",").replace(u";", u",").split(u",")
@@ -353,8 +353,8 @@ class EntityTagger():
 
         return (pos_tag, neg_tag)
 
-    def tag_sen_bisec_ld(self, u_str):
-        if self.mode == "query":
+    def tag_sen_bisec_ld(self, u_str, mode="doc"):
+        if mode == "query":
             f = u_str.replace(u"，", u",").replace(u" ", u",").split(u",")
         else:
             f = u_str.replace(u"，", u",").split(u",")
@@ -402,12 +402,12 @@ class EntityTagger():
 
         return (pos_tag, neg_tag)
 
-    def fuzzy_tag_sen(self, u_str):
+    def fuzzy_tag_sen(self, u_str, mode="doc"):
         all_tags = []
-        all_tags.append(self.tag_sen_basic(u_str))
-        all_tags.append(self.tag_sen_bisec(u_str))
-        all_tags.append(self.tag_sen_dp(u_str))
-        all_tags.append(self.tag_sen_bisec_ld(u_str))
+        all_tags.append(self.tag_sen_basic(u_str, mode))
+        all_tags.append(self.tag_sen_bisec(u_str, mode))
+        all_tags.append(self.tag_sen_dp(u_str, mode))
+        all_tags.append(self.tag_sen_bisec_ld(u_str, mode))
 
         all_pos_tag = {}
         all_neg_tag = {}
@@ -530,7 +530,7 @@ class EntityTagger():
                 Res[pattern.name] = "阳"
         return Res
 
-    def tag(self, u_str):
+    def tag(self, u_str, mode="doc"):
         self.mk_str = ""
 
         f_sen = u_str.rstrip(u"\r\n\t ").lstrip("\r\n\t ").split(u"。")
@@ -546,8 +546,8 @@ class EntityTagger():
         for sen in f_sen:
             if sen.lstrip("\r\n\t ").rstrip("\r\n\t ") == u"":
                 continue
-            (exact_pos_tag, exact_neg_tag) = self.exact_tag_sen(sen)
-            (fuzzy_pos_tag, fuzzy_neg_tag) = self.fuzzy_tag_sen(sen)
+            (exact_pos_tag, exact_neg_tag) = self.exact_tag_sen(sen, mode)
+            (fuzzy_pos_tag, fuzzy_neg_tag) = self.fuzzy_tag_sen(sen, mode)
             pos_tag.update(exact_pos_tag.keys())
             neg_tag.update(exact_neg_tag.keys())
             for t in fuzzy_pos_tag:
@@ -599,7 +599,7 @@ class EntityTagger():
 
             self.mk_str += "。"
 
-        return (pos_tag, neg_tag, polarity_res, range_res_lower, range_res_upper, kv_value, self.mk_str)
+        return (list(pos_tag), list(neg_tag), polarity_res, range_res_lower, range_res_upper, kv_value, self.mk_str)
  
 def xiaoqi(res, value):
     wrong_keys = []

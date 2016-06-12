@@ -10,19 +10,16 @@ from bottle import route, run, template, static_file, request, redirect
 from config import Config
 from Mysql import Mysql,MySQLdb
 
-config = Config("./conf/search.conf")
-entitySrc= config.get("etagger", "entity_src")
-sys.path.append(entitySrc)
 
 from essearch import ESSearch
 
+config = Config("./conf/search.conf")
 BATCH = config.get("search", "batch")
 SEARCH_HOST = config.get("search", "host")
 SEARCH_TYPE = config.get("search", "type")
 
-entityDictName = config.get("etagger", "entity_dict_name")
-entityDict = config.get("etagger", "entity_dict")
-wordsegDict = config.get("etagger", "wordseg_dict")
+etaggerHost = config.get("etagger", "host")
+etaggerTimeout = int(config.get("etagger", "timeout"))
 mode = config.get("etagger", "mode")
 
 MYSQL_HOST = config.get("mysql", "host")
@@ -383,14 +380,10 @@ def server_static(filePath):
 def server_static(filePath):
     return static_file(filePath, root='./bootstrap-table/')
 
-@route('/etagger', method='POST')
-def index():
-    input = request.json
-    a,b,c,d,e,f,h = es.etagger.tag(input['input'])
-    print h
-    return h
-
 if __name__ == "__main__":
-    es = ESSearch(SEARCH_HOST)
-    es.initEtagger(entityDictName, entityDict, wordsegDict, mode)
+    import zerorpc
+    client = zerorpc.Client(timeout=etaggerTimeout)
+    client.connect("tcp://%s" %(etaggerHost))
+    es = ESSearch(SEARCH_HOST, client.tag)
     run(host='0.0.0.0', port=8080)
+    client.close()
