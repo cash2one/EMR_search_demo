@@ -8,11 +8,19 @@ import commands
 from elasticsearch import Elasticsearch, exceptions, helpers
 
 class ESIndex:
-    def __init__(self, hosts):
+    def __init__(self, hosts, index, doc_type):
         self.es = Elasticsearch(hosts)
+        self._index = index
+        self._doc_type = doc_type
+
+    def indexWapper(self, doc_id, body): 
+        return self.es.index(index=self._index, doc_type=self._doc_type, body=body, id=doc_id)
 
     def index(self, index, doc_type, doc_id, body):
         return self.es.index(index=index, doc_type=doc_type, body=body, id=doc_id)
+
+    def deleteWapper(self, doc_id):
+        return self.es.delete(index=self._index, doc_type = self._doc_type, id = doc_id)
 
     def delete(self, index, doc_type, doc_id):
         return self.es.delete(index=index, doc_type = doc_type, id = doc_id)
@@ -44,9 +52,12 @@ class ESIndex:
     def getDoc(self,index, doc_type, doc_id):
         return self.es.get(index=index, doc_type=doc_type, id=doc_id)
 
+    def getDocWapper(self, doc_id):
+        return self.es.get(index=self._index, doc_type=self._doc_type, id=doc_id)
+
 if __name__ == "__main__":
-    es = ESIndex("127.0.0.1:9200")
-    print json.dumps(es.getDoc('20160606', 'case', '29824'))
+    es = ESIndex("127.0.0.1:9200", "20160606", "case")
+    print json.dumps(es.getDoc('29824'))
 
 
 
