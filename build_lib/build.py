@@ -14,6 +14,9 @@ from esindex import ESIndex
 import random
 
 global es
+global rpc_clients
+global tagger_host
+rpc_clients = {}
 
 def start_html(d):
     res_str = ""
@@ -45,6 +48,14 @@ def writeFile(filename, content):
     with open(filename, "w") as f:
         f.write(content)
 
+def getRpcClient(host):
+    if host in rpc_clients:
+        return rpc_clients[host]
+    else :
+        rpc_client = zerorpc.Client()
+        rpc_client.connect("tcp://%s" %(host))
+        rpc_clients[host] = rpc_client
+
 def tagCaseHtml(tagger_host, filename, content, outpath):
     res_json_dict = {}
     res_json_dict["symp_text"] = ""
@@ -56,13 +67,12 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     all_kv_res = {}
 
     rpc_client = zerorpc.Client()
-    host = tagger_host[random.choice(xrange(0, len(tagger_host)))]
-    rpc_client.connect("tcp://%s" %(host))
+    rpc_client.connect("tcp://%s" %(tagger_host))
     try:
         bs = rpc_client.basic_struct(content)
     except:
         print traceback.format_exc()
-        print "%s deal with %s failed" %(host, filename)
+        print "%s deal with %s failed" %(tagger_host, filename)
         return
 
     res_ret = start_html(filename)
@@ -211,11 +221,13 @@ if __name__ == "__main__":
     for d in os.listdir(base):
         file_name = os.path.join(base, d)
         content = open(file_name).read().decode("utf8")
-        cases.append([tagger_host, d, content, outpath])
+        host = tagger_host[random.choice(xrange(0, len(tagger_host)))]
+        cases.append([host, d, content, outpath])
         #tagCaseHtml(d, content, outpath)
 
     from gevent.pool import Pool
-    pool = Pool(3)
+    pool = Pool(6)
     result = pool.map(wapper, cases)
+    #pool.close()
     pool.join()
 
