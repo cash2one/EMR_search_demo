@@ -15,8 +15,6 @@ import gevent
 import time
 from gevent import getcurrent
 
-#from gevent import monkey; monkey.patch_thread()
-
 class Tagger(object):
     def __init__(self):
         self.emr_preproc = EMRPreproc()
@@ -37,8 +35,8 @@ class Tagger(object):
 
 if __name__ == "__main__":
     pool_size = 6
-    server = zerorpc.Server(Tagger(), pool_size = pool_size)
-    #server = zerorpc.Server(Tagger())
+    #server = zerorpc.Server(Tagger(), pool_size = pool_size)
+    server = zerorpc.Server(Tagger())
     server.bind("tcp://0.0.0.0:9999")
     print 'tagger service start....'
     server.run()

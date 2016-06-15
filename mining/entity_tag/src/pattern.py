@@ -10,7 +10,7 @@ class JianyanKV:
         for line in open(file_in):
             if line.startswith("#"):
                 continue
-            items = line.strip().split(" ")
+            items = line.strip().split("\t")
             if len(items) != 3:
                 continue
             key = items[0]
@@ -30,7 +30,7 @@ class JianyanPolarity:
         for line in open(file_in):
             if line.startswith("#"):
                 continue
-            items = line.strip().split(" ")
+            items = line.strip().split("\t")
             if len(items) != 2:
                 continue
             key = items[0]

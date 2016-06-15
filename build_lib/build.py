@@ -55,6 +55,7 @@ def getRpcClient(host):
         rpc_client = zerorpc.Client()
         rpc_client.connect("tcp://%s" %(host))
         rpc_clients[host] = rpc_client
+        return rpc_client
 
 def tagCaseHtml(tagger_host, filename, content, outpath):
     res_json_dict = {}
@@ -66,8 +67,9 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     all_range_upper = {}
     all_kv_res = {}
 
-    rpc_client = zerorpc.Client()
-    rpc_client.connect("tcp://%s" %(tagger_host))
+    #rpc_client = zerorpc.Client()
+    #rpc_client.connect("tcp://%s" %(tagger_host))
+    rpc_client = getRpcClient(tagger_host)
     try:
         bs = rpc_client.basic_struct(content)
     except:
@@ -134,7 +136,7 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
                     try:
                         (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = rpc_client.tag(bs[title], "doc")
                     except:
-                        print traceback.format_exc()
+                        print tagger_host, traceback.format_exc()
                     all_pos_tag = all_pos_tag | set(pos_tag)
                     all_neg_tag = all_neg_tag | set(neg_tag)
                     for k in polarity_res:
@@ -147,7 +149,7 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
                         all_kv_res[k] = kv_res[k]
                     res_json_dict["symp_text"] += bs[title] + "\r\n"
                     res_ret += norm_text(mk_str)
-    rpc_client.close()
+    #rpc_client.close()
     res_ret += end_html()
 
     res_json_dict["symp_pos_tag"] = list(all_pos_tag)

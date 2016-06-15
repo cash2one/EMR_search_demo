@@ -655,6 +655,7 @@ if __name__ == "__main__":
     s = u"尿胆原1+, 尿胆原16umol/l,尿比重正常 1.010,,LYMPH,:0.038,Hb 108g/L,尿酸碱度5.0  ,复查生化示,CO2 13mmol/L,,Ca2.45mmol/L,Na120mmol/L,K3.8mmol/L,Cl 90mmol/L,Glu8.8mmol/L,"
     s = u"酮体-,尿胆红素+,尿糖-,尿白细胞,-,,尿隐血-。尿隐血150/ul,尿蛋白0.75g/l,尿PH5.0,"
     s = u"ERY+.PRO(-), 给予急查血常规提示WBC 6.11，10E9/L，"
+    s = u"RBC 3.02*10^12/L，WBC 5.09*10^9/L，"
 
     print s
     (a,b,c,d,e,f,h) = etagger.tag(s)
