@@ -2,17 +2,426 @@
 <fields>
     <index name="case">
         <field>
-            <name> name </name>
-            <type> string </type>
-            <store> False </store>
+            <name> 尿糖 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> Murphy征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> ldh </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> alb </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> scc </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> Fib </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> hb </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> kfxt </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> alt </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> alp </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 墨菲氏征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> HbsAg </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> IgG </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> PRO </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> bnp </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> bnu </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> laky </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> neut% </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> symp_text </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> tg </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 克氏征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> bil </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 压痛 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> cea </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> TnT </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 尿蛋白 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> dd </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> symp_neg_tag </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 淋巴结 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 大肠埃希菌 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> hdl-c </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 大便潜血 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> p </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> CA19-9 </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 尿酮体 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 双侧踝阵挛 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 抗HIV </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> dbil </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> co2 </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> hct </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 抗ANA </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 尿白细胞 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 大便隐血 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 潜血 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> IgM </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> u_glu </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 吸吮反射 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> wbc </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> plt </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> HBsAb </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> ast </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> K </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> b2mg </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> jhdb </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 腹部移动性浊音 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> xwdby </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> rbc </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> ca125 </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 双侧Babinski Sign </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> M-CEA </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 胆红素 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> glu </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 血红蛋白 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> Na </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 肝吸虫 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 隐血 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 右下肢巴氏征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 红细胞镜检 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> blo_2 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> tp </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> cr </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> GLU </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 布氏征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 脑膜刺激征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> xdfm </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> ldl-c </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> uro_1 </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> mch </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> Ki </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 尿酮 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> HbcAb </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> s试验 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> c3 </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> symp_pos_tag </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 大便培养 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> Ca </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 皮肤划痕试验 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> dbqx </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 心梗组合 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> ua </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> chol </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> pro </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> an </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> u_ket </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 肝颈静脉回流征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 反跳痛 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> afp </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> xhdb </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 乙肝及肝炎系列 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 心肺 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> tbil </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 多克征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> 病理征 </name>
+            <type>string</type>
+        </field>
+        <field>
+            <name> zfm </name>
+            <type>double</type>
+        </field>
+        <field>
+            <name> 反跳试验 </name>
+            <type>string</type>
         </field>
 
-        <field>
-            <name> id </name>
-            <type> int </type>
-            <analyzer> </analyzer>
-            <store> False </store>
-        </field>
     </index>
 </fields>
 
