@@ -10,10 +10,11 @@ from multiprocessing import Pool
 from config import Config
 import traceback
 from collections import OrderedDict
-from esindex import ESIndex
+#from esindex import ESIndex
+from mongo import Mongo
 import random
 
-global es
+global mongo_client
 global rpc_clients
 global tagger_host
 rpc_clients = {}
@@ -67,14 +68,15 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     all_range_upper = {}
     all_kv_res = {}
 
-    #rpc_client = zerorpc.Client()
-    #rpc_client.connect("tcp://%s" %(tagger_host))
-    rpc_client = getRpcClient(tagger_host)
+    rpc_client = zerorpc.Client()
+    rpc_client.connect("tcp://%s" %(tagger_host))
+    #rpc_client = getRpcClient(tagger_host)
     try:
         bs = rpc_client.basic_struct(content)
     except:
         print traceback.format_exc()
         print "%s deal with %s failed" %(tagger_host, filename)
+        rpc_client.close()
         return
 
     res_ret = start_html(filename)
@@ -137,6 +139,8 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
                         (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = rpc_client.tag(bs[title], "doc")
                     except:
                         print tagger_host, traceback.format_exc()
+                        rpc_client.close()
+                        return
                     all_pos_tag = all_pos_tag | set(pos_tag)
                     all_neg_tag = all_neg_tag | set(neg_tag)
                     for k in polarity_res:
@@ -149,7 +153,7 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
                         all_kv_res[k] = kv_res[k]
                     res_json_dict["symp_text"] += bs[title] + "\r\n"
                     res_ret += norm_text(mk_str)
-    #rpc_client.close()
+    rpc_client.close()
     res_ret += end_html()
 
     res_json_dict["symp_pos_tag"] = list(all_pos_tag)
@@ -190,7 +194,13 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     writeFile(out_file, res_ret)
 
     id = filename.split('.')[0]
-    es.indexWapper(int(id), js)
+    try:
+        #es.indexWapper(int(id), js)
+        key = {"_id":int(id)}
+        mongo_client.update(key, js)
+    except:
+        print id, js, traceback.format_exc()
+        return
 
 
     print out_file
@@ -200,7 +210,7 @@ def wapper(args):
 
 if __name__ == "__main__":
 
-    config = Config("./build.conf")
+    config = Config("../conf/build.conf")
 
     base = config.get("path", "input")
     if base[-1] != '/':
@@ -209,15 +219,17 @@ if __name__ == "__main__":
     if outpath[-1] != '/':
         outpath += '/'
 
-    es_host = config.get("index", "host")
-    es_batch = config.get("index", "batch")
-    es_type = config.get("index", "type")
+    mongo_host = config.get("mongo", "host")
+    mongo_port = int(config.get("mongo", "port"))
+    mongo_db = config.get("mongo", "db")
+    mongo_table = config.get("mongo", "table")
 
     tagger_host = config.get("tagger", "host").split(";")
     tagger_timeout = int(config.get("tagger", "timeout"))
     tagger_mode = config.get("tagger", "mode")
 
-    es = ESIndex(es_host, es_batch, es_type)
+    #es = ESIndex(es_host, es_batch, es_type)
+    mongo_client = Mongo(host=mongo_host, port=mongo_port, db=mongo_db, table=mongo_table)
 
     cases = []
     for d in os.listdir(base):

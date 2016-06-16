@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fields>
+    <index name="case">
+        <field>
+            <name> name </name>
+            <type> string </type>
+            <store> False </store>
+        </field>
+
+        <field>
+            <name> id </name>
+            <type> int </type>
+            <analyzer> </analyzer>
+            <store> False </store>
+        </field>
+    </index>
+</fields>
+
+
