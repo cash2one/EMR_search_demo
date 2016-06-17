@@ -11,7 +11,7 @@ from config import Config
 import traceback
 
 class Index:
-    def __init__(self, conf):
+    def __init__(self, conf, xmlConf=""):
         config = Config(conf)
         es_host = config.get("es", "host")
         es_batch = config.get("es", "batch")
@@ -25,6 +25,19 @@ class Index:
         self.mongo = Mongo(db=mongo_db, host=mongo_host, port=mongo_port, table=mongo_table)
 
         self.step = int(config.get("mongo", "step"))
+
+        if xmlConf == "":
+            self.fields = None
+        else :
+            self.fields = IndexXmlParser(xmlConf)
+
+    def setIndex(self):
+        self.es.create()
+        for doc_type in index.fields.keys():
+            mapping = {}
+            for field in index.fields[doc_type]:
+                mapping[field.name] = field.attrs()
+            self.es.putMapping({"properties":mapping}, doc_type = doc_type)
 
     def run(self):
         size = self.mongo.size()
@@ -46,5 +59,9 @@ class Index:
 
 if __name__ == "__main__":
     #field= Index("../conf/index.conf")
-    index = Index("../conf/index.conf")
+    index = Index("../conf/index.conf", "../conf/index_field.xml")
+    index.setIndex()
+    print "create Index Success"
     index.run()
+    print "build index Finished"
+

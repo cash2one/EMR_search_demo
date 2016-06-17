@@ -57,6 +57,15 @@ class ESIndex:
  
         return self.es.get(index=index_, doc_type=doc_type_, id=doc_id)
 
+    def putMapping(self, body, index = "", doc_type =""):
+        index_ = self.index if index == "" else index
+        doc_type_ = self.doc_type if doc_type == "" else doc_type
+        return self.es.indices.put_mapping(index=index_, doc_type=doc_type_, body=body)
+
+    def create(self, body = {}, index = "", timeout = 30):
+        index_ = self.index if index == "" else index
+        return self.es.indices.create(index_, body=body)
+         
 if __name__ == "__main__":
     es = ESIndex("127.0.0.1:9200", "20160606", "case")
     print json.dumps(es.getDoc('29824'))

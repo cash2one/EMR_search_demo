@@ -76,6 +76,7 @@
         <field>
             <name> symp_text </name>
             <type>string</type>
+            <analyzer>analyzed</analyzer>
         </field>
         <field>
             <name> tg </name>
@@ -112,6 +113,7 @@
         <field>
             <name> symp_neg_tag </name>
             <type>string</type>
+            <analyzer>analyzed</analyzer>
         </field>
         <field>
             <name> 淋巴结 </name>
@@ -336,6 +338,7 @@
         <field>
             <name> symp_pos_tag </name>
             <type>string</type>
+            <analyzer>analyzed</analyzer>
         </field>
         <field>
             <name> 大便培养 </name>

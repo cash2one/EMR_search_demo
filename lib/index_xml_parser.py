@@ -3,12 +3,13 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from xml.etree import ElementTree  
+import json
 
 class Field:
     def __init__(self):
         self.name = ""
         self.type = "string"
-        self.analyzer = None
+        self.analyzer = "not_analyzed"
         self.store = False
 
     @property
@@ -40,9 +41,16 @@ class Field:
         self.store = store_
 
     def __str__(self):
-        return "name:%s, type:%s, analyzer:%s, store:%s" %\
-            (self.name, self.type, self.analyzer, self.store)
+        js = {}
+        js[self.name] = self.attr()
+        return json.dumps(js)
 
+    def attrs(self):
+        attrs = {}
+        attrs["type"] = self.type
+        attrs["index"] = self.analyzer
+        attrs["store"] = self.store
+        return attrs
 
 class IndexXmlParser:
     def __init__(self, xml):
@@ -66,11 +74,18 @@ class IndexXmlParser:
                 field = Field()
                 for attr in c.getchildren():
                     if hasattr(field, attr.tag):
-                        setattr(field, attr.tag, attr.text)
+                        setattr(field, attr.tag, attr.text.strip())
 
                 fields.append(field)
             self.index[name] = fields
              
 if __name__ == "__main__":
-    indexXml = IndexXmlParser("../conf/test.xml")
-    print indexXml["abc"]
+    indexXml = IndexXmlParser("../conf/index_field.xml")
+    #print indexXml["abc"]
+    for key in indexXml.keys():
+        for field in indexXml[key]:
+            a = field
+            print a
+
+
+            
