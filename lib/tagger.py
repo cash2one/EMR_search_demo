@@ -13,8 +13,8 @@ from emr_preprocessor import EMRPreproc
 import traceback
 import gevent
 import time
-from gevent import getcurrent
 from config import Config
+from multiprocessing import Pool
 
 class Tagger(object):
     def __init__(self, conf):
@@ -51,21 +51,34 @@ class Tagger(object):
             raise IOError(-1, 'not exist', path)
 
     def tag(self, txt, mode):
-        print 'calling tag ', id(getcurrent())
+        print 'calling tag '
         return self.tagger.tag(txt, mode)
 
     def basic_struct(self, content):
-        print 'calling basic_struct', id(getcurrent())
+        print 'calling basic_struct'
         return self.emr_preproc.basic_struct(content)
+
+def wapper(ip):
+    conf = '../conf/entity_tag.conf'
+    server = zerorpc.Server(Tagger(conf))
+    server.bind("tcp://0.0.0.0:%d" %(ip))
+    server.run()
+    server.close()
+
 
 if __name__ == "__main__":
     pool_size = 6
     #server = zerorpc.Server(Tagger(), pool_size = pool_size)
-    conf = '../conf/entity_tag.conf'
-    server = zerorpc.Server(Tagger(conf))
-    server.bind("tcp://0.0.0.0:9999")
+    #server = zerorpc.Server(Tagger(conf))
+    #server.bind("tcp://0.0.0.0:9999")
     print 'tagger service start....'
-    server.run()
-    server.close()
+   # server.run()
+   # server.close()
 
+    pool = Pool(pool_size)
+    ips = []
+    for i in xrange(0, pool_size):
+        ips.append(i+9990)
+    pool.map(wapper, ips)
+ 
 
