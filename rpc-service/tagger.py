@@ -48,7 +48,7 @@ class Tagger(object):
 
     def check(self, path):
         if not os.path.exists(path):
-            raise IOError(-1, 'not exist', path)
+            raise IOError, path + ' not exist'
 
     def tag(self, txt, mode):
         print 'calling tag '
