@@ -3,7 +3,6 @@ import sys
 import re
 reload(sys)
 sys.setdefaultencoding('utf-8')
-sys.path.append("/home/cihang/word-seg/src")
 from entity_dict import *
 from text_feature import *
 from word_seg import *
@@ -33,7 +32,7 @@ class ESentence():
         self.sections.append(x)
 
 class EntityTagger():
-    def __init__(self, edict, epattern, ws_dict_path = "", mode = "doc"):
+    def __init__(self, edict, epattern, javapath, class_, ws_dict_path = "", mode = "doc"):
         self.edict = edict
         self.epattern = epattern
         self.max_len = 0
@@ -45,8 +44,8 @@ class EntityTagger():
         #else:
         #    self.ws = WordSeg(dict_path = ws_dict_path)
         self.feature = TextFeature()
-        startJVM(getDefaultJVMPath(), "-Djava.class.path=/home/cihang/HanLP/hanlp.jar:/home/cihang/HanLP")
-        self.dp = JClass("com.hankcs.hanlp.dependency.CRFDependencyParser")
+        startJVM(getDefaultJVMPath(), "-Djava.class.path=%s/hanlp.jar:%s" %(javapath, javapath))
+        self.dp = JClass(class_)
         self.mode = mode
 
         self.mk_str = ""
@@ -656,6 +655,7 @@ if __name__ == "__main__":
     s = u"酮体-,尿胆红素+,尿糖-,尿白细胞,-,,尿隐血-。尿隐血150/ul,尿蛋白0.75g/l,尿PH5.0,"
     s = u"ERY+.PRO(-), 给予急查血常规提示WBC 6.11，10E9/L，"
     s = u"RBC 3.02*10^12/L，WBC 5.09*10^9/L，"
+    s = u"常规提示WBC不高90×106/L，RBC，3，，，李凡他试验阳性，"
 
     print s
     (a,b,c,d,e,f,h) = etagger.tag(s)

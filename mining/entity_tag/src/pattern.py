@@ -55,13 +55,15 @@ class Atom:
         self.unit = unit
 
 class Pattern:
-    def __init__(self):
+    def __init__(self, jianyan_conf):
         self.patternList = []
         self.exp1 = u"\W*?([0-9]+(?:[\.,][0-9]*)?)\W*?[，×xX,\*]\W*?(:?[0-9]+(?:[eE\^][0-9]*)?)\D*?"
         self.exp2 = u"\W*?([0-9]+(?:[\.,][0-9]*)?)"
         self.exp3 = u"\W*?([0-9]+(?:\.[0-9]*)?)\D*?"
         self.yang = u"[^a-zA-Z]*?[+十阳]+"
         self.ying = u"[^a-zA-Z]*?[-阴]+" 
+
+        self.jianyan_conf = jianyan_conf
    
     def get_exp(self, unit):
         if unit == u"%" or unit == u"":
@@ -73,13 +75,13 @@ class Pattern:
             return self.exp3 + s
 
     def getPattern(self):
-        jianyan, unit = JianyanKV().load_jianyan("/home/yongsheng/EMR_search_demo/mining/entity_tag/data/jianyan.config")
+        jianyan, unit = JianyanKV().load_jianyan(self.jianyan_conf)
         for key in jianyan:
             u = unit[key]
             regex = u"(?:" + jianyan[key] + u")" + self.get_exp(u)
             self.patternList.append(Atom(key, regex, 1, "KV", u))
 
-        jianyan = JianyanPolarity().load_jianyan("/home/yongsheng/EMR_search_demo/mining/entity_tag/data/jianyan.config")
+        jianyan = JianyanPolarity().load_jianyan(self.jianyan_conf)
         for key in jianyan:
             regex_yang = u"(?:" + jianyan[key] + u")" + self.yang 
             regex_ying = u"(?:" + jianyan[key] + u")" + self.ying

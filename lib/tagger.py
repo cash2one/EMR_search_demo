@@ -14,16 +14,41 @@ import traceback
 import gevent
 import time
 from gevent import getcurrent
+from config import Config
 
 class Tagger(object):
-    def __init__(self):
+    def __init__(self, conf):
+        config = Config(conf)
+        yx_title = config.get("emr_preproc", "yx_title")
+        messy_code = config.get("emr_preproc", "messy_code")
+        dict_type = config.get("entity_dict", "dict_type")
+        dict_file = config.get("entity_dict", "dict_file")
+        jianyan = config.get("pattern", "jianyan")
+        wordseg_dict = config.get("entity_dict", "wordseg_dict")
+        javapath = config.get("hanlp", "javapath")
+        class_ = config.get("hanlp", "class")
+        ####
+        self.check(yx_title)
+        self.check(messy_code)
+        self.check(dict_file)
+        self.check(jianyan)
+        self.check(wordseg_dict)
+        self.check(javapath)
+        ###
         self.emr_preproc = EMRPreproc()
-        self.emr_preproc.load_yx_title("../mining/entity_tag/data/yx_seg_title.txt")
-        self.emr_preproc.load_messy_code("../mining/entity_tag/data/messy_code.txt")
-        edict = EntityDict("symp")
-        edict.load_file("../mining/entity_tag/data/class_term.dict.gbk")
-        patternList = Pattern().getPattern()
-        self.tagger = EntityTagger(edict, patternList, "../mining/entity_tag/dict/wordseg_dict/")
+        self.emr_preproc.load_yx_title(yx_title)
+        self.emr_preproc.load_messy_code(messy_code)
+
+        edict = EntityDict(dict_type)
+        edict.load_file(dict_file)
+
+        patternList = Pattern(jianyan).getPattern()
+
+        self.tagger = EntityTagger(edict, patternList, javapath, class_, wordseg_dict)
+
+    def check(self, path):
+        if not os.path.exists(path):
+            raise IOError(-1, 'not exist', path)
 
     def tag(self, txt, mode):
         print 'calling tag ', id(getcurrent())
@@ -36,7 +61,8 @@ class Tagger(object):
 if __name__ == "__main__":
     pool_size = 6
     #server = zerorpc.Server(Tagger(), pool_size = pool_size)
-    server = zerorpc.Server(Tagger())
+    conf = '../conf/entity_tag.conf'
+    server = zerorpc.Server(Tagger(conf))
     server.bind("tcp://0.0.0.0:9999")
     print 'tagger service start....'
     server.run()
