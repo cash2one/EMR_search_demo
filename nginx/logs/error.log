@@ -1,0 +1,319 @@
+2016/06/20 18:22:53 [emerg] 13720#0: "access_log" directive is not allowed here in .//conf/nginx.conf:5
+2016/06/20 18:23:42 [emerg] 13745#0: "access_log" directive is not allowed here in .//conf/nginx.conf:17
+2016/06/20 18:23:58 [emerg] 13780#0: "access_log" directive is not allowed here in .//conf/nginx.conf:36
+2016/06/20 19:24:16 [error] 15393#0: *33 upstream timed out (110: Connection timed out) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:24:16 [error] 15393#0: *35 upstream timed out (110: Connection timed out) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9995", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9992", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9993", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9991", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *177 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9990", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *184 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *185 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *186 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *187 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:48 [error] 15790#0: *188 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *189 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *190 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *191 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *192 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *193 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *194 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:49 [error] 15790#0: *195 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *196 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *197 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *198 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *199 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *200 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:50 [error] 15790#0: *201 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *202 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *203 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *204 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *205 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *206 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *207 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:51 [error] 15790#0: *208 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *209 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *210 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *211 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *212 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *213 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:52 [error] 15790#0: *214 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *215 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *216 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *217 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *218 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *219 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:53 [error] 15790#0: *220 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *221 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *222 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *223 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *224 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *225 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *226 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:54 [error] 15790#0: *227 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *228 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *229 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *230 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *231 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *232 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *233 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:55 [error] 15790#0: *234 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *235 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *236 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *237 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *238 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *239 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:56 [error] 15790#0: *240 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *241 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *242 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *243 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *244 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *245 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:57 [error] 15790#0: *246 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *247 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *248 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *249 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *250 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *251 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *252 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *253 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:58 [error] 15790#0: *254 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9995", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9992", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9993", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9991", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *255 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9990", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *262 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *263 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *264 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *265 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:33:59 [error] 15790#0: *266 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *267 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *268 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *269 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *270 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *271 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:00 [error] 15790#0: *272 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *273 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *274 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *275 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *276 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *277 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:01 [error] 15790#0: *278 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *279 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *280 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *281 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *282 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *283 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *284 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:02 [error] 15790#0: *285 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *286 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *287 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *288 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *289 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *290 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *291 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:03 [error] 15790#0: *292 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *293 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *294 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *295 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *296 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *297 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *298 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *299 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:04 [error] 15790#0: *300 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *301 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *302 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *303 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *304 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *305 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:05 [error] 15790#0: *306 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *307 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *308 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *309 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *310 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *311 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *312 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:06 [error] 15790#0: *313 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *314 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *315 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *316 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *317 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *318 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *319 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:07 [error] 15790#0: *320 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *321 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *322 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *323 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *324 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *325 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:08 [error] 15790#0: *326 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *327 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *328 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *329 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *330 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *331 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:09 [error] 15790#0: *332 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9995", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9992", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9993", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9991", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *333 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9990", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *340 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *341 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *342 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *343 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *344 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:10 [error] 15790#0: *345 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:11 [error] 15790#0: *346 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:11 [error] 15790#0: *347 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:11 [error] 15790#0: *348 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:11 [error] 15790#0: *349 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:11 [error] 15790#0: *350 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *351 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *352 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *353 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *354 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *355 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *356 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:12 [error] 15790#0: *357 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *358 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *359 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *360 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *361 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *362 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:13 [error] 15790#0: *363 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *364 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *365 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *366 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *367 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *368 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *369 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:14 [error] 15790#0: *370 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *371 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *372 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *373 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *374 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *375 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *376 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:15 [error] 15790#0: *377 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *378 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *379 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *380 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *381 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *382 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:16 [error] 15790#0: *383 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *384 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *385 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *386 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *387 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *388 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *389 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:17 [error] 15790#0: *390 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *391 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *392 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *393 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *394 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *395 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:18 [error] 15790#0: *396 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *397 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *398 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *399 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *400 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *401 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *402 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:19 [error] 15790#0: *403 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *404 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *405 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *406 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *407 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *408 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:20 [error] 15790#0: *409 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9995", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9992", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9993", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9991", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15790#0: *410 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9990", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9994", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9995", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9992", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9993", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9991", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *417 connect() failed (111: Connection refused) while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, upstream: "192.168.1.109:9990", bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *424 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *425 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *426 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *427 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:21 [error] 15794#0: *428 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *429 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *430 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *431 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *432 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *433 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:22 [error] 15794#0: *434 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *435 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *436 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *437 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *438 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *439 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *440 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *441 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:23 [error] 15794#0: *442 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *443 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *444 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *445 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *446 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *447 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:24 [error] 15794#0: *448 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *449 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *450 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *451 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *452 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *453 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *454 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:25 [error] 15794#0: *455 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *456 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *457 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *458 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *459 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *460 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *461 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:26 [error] 15794#0: *462 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *463 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *464 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *465 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *466 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *467 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *468 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:27 [error] 15794#0: *469 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:28 [error] 15794#0: *470 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:28 [error] 15794#0: *471 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:28 [error] 15794#0: *472 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:28 [error] 15794#0: *473 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:28 [error] 15794#0: *474 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *475 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *476 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *477 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *478 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *479 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *480 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *481 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:29 [error] 15794#0: *482 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *483 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *484 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *485 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *486 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *487 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:30 [error] 15794#0: *488 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *489 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *490 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *491 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *492 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *493 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *494 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
+2016/06/20 19:34:31 [error] 15794#0: *495 no live upstreams while connecting to upstream, client: 192.168.1.100, server: 0.0.0.0:9090, bytes from/to client:0/0, bytes from/to upstream:0/0
