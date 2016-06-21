@@ -3,10 +3,19 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 sys.path.append("../lib/")
+sys.path.append("../rpc-service/gen-py")
+sys.path.append("../rpc-service/")
 import json
 import os
-import zerorpc
 from multiprocessing import Pool
+
+from tag import Tagger
+from thrift import Thrift
+from thrift.transport import TSocket
+from thrift.transport import TTransport
+from thrift.protocol import TBinaryProtocol
+import time
+
 from config import Config
 import traceback
 from collections import OrderedDict
@@ -14,10 +23,32 @@ from collections import OrderedDict
 from mongo import Mongo
 import random
 
-global mongo_client
-global rpc_clients
-global tagger_host
-rpc_clients = {}
+global mongo_host, mongo_port, mongo_table, mongo_db
+
+class TaggerClient():
+    def __init__(self, ip, port):
+        self.transport = TSocket.TSocket(ip, port)
+        self.transport = TTransport.TBufferedTransport(self.transport)
+        self.protocol = TBinaryProtocol.TBinaryProtocol(self.transport)
+        self.client = Tagger.Client(self.protocol)
+        self.open()
+
+    def open(self):
+        return self.transport.open()
+
+    def basic_struct(self, content):
+        return self.client.basic_struct(content)
+
+    def tag(self, text, mode):
+        return self.client.tag(text, mode)
+
+    def close(self):
+        return self.transport.close()
+
+    def client(self):
+        return self.client()
+
+
 
 def start_html(d):
     res_str = ""
@@ -49,16 +80,16 @@ def writeFile(filename, content):
     with open(filename, "w") as f:
         f.write(content)
 
-def getRpcClient(host):
-    if host in rpc_clients:
-        return rpc_clients[host]
-    else :
-        rpc_client = zerorpc.Client()
-        rpc_client.connect("tcp://%s" %(host))
-        rpc_clients[host] = rpc_client
-        return rpc_client
+class TimeCal():
+    def __init__(self):
+        self.begin = time.time()
 
-def tagCaseHtml(tagger_host, filename, content, outpath):
+    def reset(self):
+        self.begin = time.time()
+
+    def cost(self):
+        return time.time() - self.begin
+def tagCaseHtml(ip, port, filename, content, outpath):
     res_json_dict = {}
     res_json_dict["symp_text"] = ""
     all_pos_tag = set()
@@ -68,14 +99,16 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     all_range_upper = {}
     all_kv_res = {}
 
-    rpc_client = zerorpc.Client()
-    rpc_client.connect("tcp://%s" %(tagger_host))
     #rpc_client = getRpcClient(tagger_host)
+    rpc_client = TaggerClient(ip, port)
+
+    timecal = TimeCal()
     try:
         bs = rpc_client.basic_struct(content)
     except:
         print traceback.format_exc()
-        print "%s deal with %s failed" %(tagger_host, filename)
+        print "%s:%d deal with %s failed" %(ip, port, filename), 
+        print timecal.cost()
         rpc_client.close()
         return
 
@@ -135,24 +168,27 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
                     res_ret += norm_text(bs[title])
                 elif type_ == 2:
                     res_ret += title_2(name)
+                    timecal.reset()
                     try:
-                        (pos_tag, neg_tag, polarity_res, range_lower, range_upper, kv_res, mk_str) = rpc_client.tag(bs[title], "doc")
+                        
+                        tag_res  = rpc_client.tag(bs[title], "doc")
                     except:
-                        print tagger_host, traceback.format_exc()
+                        print traceback.format_exc()
+                        print "%s:%d deal with %s failed" %(ip, port, filename), timecal.cost()
                         rpc_client.close()
                         return
-                    all_pos_tag = all_pos_tag | set(pos_tag)
-                    all_neg_tag = all_neg_tag | set(neg_tag)
-                    for k in polarity_res:
-                        all_polarity_res[k] = polarity_res[k]
-                    for k in range_lower:
-                        all_range_lower[k] = range_lower[k]
-                    for k in range_upper:
-                        all_range_upper[k] = range_upper[k]
-                    for k in kv_res:
-                        all_kv_res[k] = kv_res[k]
+                    all_pos_tag = all_pos_tag | set(tag_res.pos_tag)
+                    all_neg_tag = all_neg_tag | set(tag_res.neg_tag)
+                    for k in tag_res.polarity_res:
+                        all_polarity_res[k] = tag_res.polarity_res[k]
+                    for k in tag_res.range_res_lower:
+                        all_range_lower[k] = tag_res.range_res_lower[k]
+                    for k in tag_res.range_res_upper:
+                        all_range_upper[k] = tag_res.range_res_upper[k]
+                    for k in tag_res.kv_value:
+                        all_kv_res[k] = tag_res.kv_value[k]
                     res_json_dict["symp_text"] += bs[title] + "\r\n"
-                    res_ret += norm_text(mk_str)
+                    res_ret += norm_text(tag_res.mk_str)
     rpc_client.close()
     res_ret += end_html()
 
@@ -197,7 +233,9 @@ def tagCaseHtml(tagger_host, filename, content, outpath):
     try:
         #es.indexWapper(int(id), js)
         key = {"_id":int(id)}
+        mongo_client = Mongo(host=mongo_host, port=mongo_port, db=mongo_db, table=mongo_table)
         mongo_client.update(key, js)
+        #mongo_client.close()
     except:
         print id, js, traceback.format_exc()
         return
@@ -224,24 +262,24 @@ if __name__ == "__main__":
     mongo_db = config.get("mongo", "db")
     mongo_table = config.get("mongo", "table")
 
-    tagger_host = config.get("tagger", "host").split(";")
+    tagger_host = config.get("tagger", "host")
     tagger_timeout = int(config.get("tagger", "timeout"))
     tagger_mode = config.get("tagger", "mode")
 
     #es = ESIndex(es_host, es_batch, es_type)
-    mongo_client = Mongo(host=mongo_host, port=mongo_port, db=mongo_db, table=mongo_table)
-
     cases = []
     for d in os.listdir(base):
         file_name = os.path.join(base, d)
-        content = open(file_name).read().decode("utf8")
+        content = open(file_name).read()
         host = tagger_host[random.choice(xrange(0, len(tagger_host)))]
-        cases.append([host, d, content, outpath])
-        #tagCaseHtml(d, content, outpath)
+        ip = tagger_host.split(':')[0]
+        port  = tagger_host.split(':')[-1]
+        cases.append([ip, int(port), d, content, outpath])
+        #tagCaseHtml(ip, int(port), d, content, outpath)
 
-    from gevent.pool import Pool
+    #from gevent.pool import Pool
     pool = Pool(6)
     result = pool.map(wapper, cases)
     #pool.close()
-    pool.join()
+    #pool.join()
 
