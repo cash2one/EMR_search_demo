@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import re
+import traceback 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from entity_dict import *
@@ -478,34 +479,13 @@ class EntityTagger():
                 if pattern.digital_index != -1:
                     s = tag_kv[1].group(pattern.digital_index)
                 if s != "":
-                    Value[pattern.name] = float(s)
+                    try:
+                        Value[pattern.name] = float(s)
+                    except:
+                        traceback.print_exc() 
 
         return Res, Value
    
-    def get_multi_value(self, u_str):
-        Res = {}
-        Value = {}
-        for pattern in self.epattern:
-            if pattern.type_ != "KVS":
-                continue
-            tag_kv = self.get_min_segment(pattern.regex, u_str, "，")
-            if tag_kv[1] != "":
-                s = ""
-                Res[pattern.name] = tag_kv[1].group(0)
-                Value[pattern.name] = []
-                if pattern.digital_index1 != -1:
-                    s = tag_kv[1].group(pattern.digital_index1)
-                if s != "":
-                    s = s.replace("^", "e")
-                    Value[pattern.name].append(float(s))
-                if pattern.digital_index2 != -1:
-                    s = tag_kv[1].group(pattern.digital_index2)
-                if s != "":
-                    s = s.replace("^", "e")
-                    Value[pattern.name].append(float(s))
-                    
-        return Res, Value
-    
     def get_polarity_value(self, u_str):
         Res = {}
         u_str_new = u_str.replace(u",", u"，")
@@ -585,16 +565,6 @@ class EntityTagger():
                     kv_value[key] = value[key]
                 if res[key] != "":
                     self.mk_str += '<span class="possymp">&nbsp;%s_%s&nbsp;</span>' % (key, res[key])
-
-#            [res, value] = self.get_multi_value(sen)
-#            for key in res:
-#                if res[key] != "":
-#                    kvs_res[key] = res[key]
-#                if key in value:
-#                    kvs_value[key] = value[key]
-#                if res[key] != "":
-#                    self.mk_str += '<span class="possymp">&nbsp;%s%s&nbsp;</span>' % (key, res[key])
-
 
             self.mk_str += "。"
 
