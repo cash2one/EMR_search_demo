@@ -146,7 +146,7 @@ def tagCaseHtml(ip, port, filename, content, outpath):
             ("med_exam", u"医学检查", 2),
             ("body_exam", u"体格检查", 2),
             ("spec_exam", u"专科检查", 2),
-            ("acce_exam", u"辅助检查", 1),
+            ("acce_exam", u"辅助检查", 2),
         ]
     caseHtmlMap[u"出院记录"] =  [
             ("med_exp", u"入院情况及诊疗经过", 2),
